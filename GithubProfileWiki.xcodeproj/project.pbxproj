@@ -9,19 +9,21 @@
 /* Begin PBXBuildFile section */
 		364E0773279522530085E799 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E0772279522530085E799 /* AppDelegate.swift */; };
 		364E0775279522530085E799 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E0774279522530085E799 /* SceneDelegate.swift */; };
-		364E0777279522530085E799 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E0776279522530085E799 /* ViewController.swift */; };
 		364E077C279522540085E799 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 364E077B279522540085E799 /* Assets.xcassets */; };
 		364E077F279522540085E799 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 364E077D279522540085E799 /* LaunchScreen.storyboard */; };
+		364E0787279527600085E799 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E0786279527600085E799 /* SearchViewController.swift */; };
+		364E0789279527950085E799 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E0788279527950085E799 /* FavoritesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		364E076F279522530085E799 /* GithubProfileWiki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubProfileWiki.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		364E0772279522530085E799 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		364E0774279522530085E799 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		364E0776279522530085E799 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		364E077B279522540085E799 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		364E077E279522540085E799 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		364E0780279522540085E799 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		364E0786279527600085E799 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		364E0788279527950085E799 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,10 +58,11 @@
 			children = (
 				364E0772279522530085E799 /* AppDelegate.swift */,
 				364E0774279522530085E799 /* SceneDelegate.swift */,
-				364E0776279522530085E799 /* ViewController.swift */,
 				364E077B279522540085E799 /* Assets.xcassets */,
 				364E077D279522540085E799 /* LaunchScreen.storyboard */,
 				364E0780279522540085E799 /* Info.plist */,
+				364E0786279527600085E799 /* SearchViewController.swift */,
+				364E0788279527950085E799 /* FavoritesViewController.swift */,
 			);
 			path = GithubProfileWiki;
 			sourceTree = "<group>";
@@ -133,8 +136,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				364E0777279522530085E799 /* ViewController.swift in Sources */,
 				364E0773279522530085E799 /* AppDelegate.swift in Sources */,
+				364E0787279527600085E799 /* SearchViewController.swift in Sources */,
+				364E0789279527950085E799 /* FavoritesViewController.swift in Sources */,
 				364E0775279522530085E799 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
