@@ -10,7 +10,6 @@
 		364E0773279522530085E799 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E0772279522530085E799 /* AppDelegate.swift */; };
 		364E0775279522530085E799 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E0774279522530085E799 /* SceneDelegate.swift */; };
 		364E0777279522530085E799 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E0776279522530085E799 /* ViewController.swift */; };
-		364E077A279522530085E799 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 364E0778279522530085E799 /* Main.storyboard */; };
 		364E077C279522540085E799 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 364E077B279522540085E799 /* Assets.xcassets */; };
 		364E077F279522540085E799 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 364E077D279522540085E799 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -20,7 +19,6 @@
 		364E0772279522530085E799 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		364E0774279522530085E799 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		364E0776279522530085E799 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		364E0779279522530085E799 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		364E077B279522540085E799 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		364E077E279522540085E799 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		364E0780279522540085E799 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -59,7 +57,6 @@
 				364E0772279522530085E799 /* AppDelegate.swift */,
 				364E0774279522530085E799 /* SceneDelegate.swift */,
 				364E0776279522530085E799 /* ViewController.swift */,
-				364E0778279522530085E799 /* Main.storyboard */,
 				364E077B279522540085E799 /* Assets.xcassets */,
 				364E077D279522540085E799 /* LaunchScreen.storyboard */,
 				364E0780279522540085E799 /* Info.plist */,
@@ -126,7 +123,6 @@
 			files = (
 				364E077F279522540085E799 /* LaunchScreen.storyboard in Resources */,
 				364E077C279522540085E799 /* Assets.xcassets in Resources */,
-				364E077A279522530085E799 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,14 +142,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		364E0778279522530085E799 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				364E0779279522530085E799 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		364E077D279522540085E799 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -288,6 +276,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GithubProfileWiki/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -295,7 +284,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ilter.personal.GithubProfileWiki;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -306,6 +295,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GithubProfileWiki/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -313,7 +303,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ilter.personal.GithubProfileWiki;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
