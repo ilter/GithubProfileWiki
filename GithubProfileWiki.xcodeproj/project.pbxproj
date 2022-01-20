@@ -13,6 +13,9 @@
 		364E077F279522540085E799 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 364E077D279522540085E799 /* LaunchScreen.storyboard */; };
 		364E0787279527600085E799 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E0786279527600085E799 /* SearchViewController.swift */; };
 		364E0789279527950085E799 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E0788279527950085E799 /* FavoritesViewController.swift */; };
+		364E078B27989BB60085E799 /* BaseUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E078A27989BB60085E799 /* BaseUITextField.swift */; };
+		364E078E279927BB0085E799 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E078D279927BB0085E799 /* UIImage+Extension.swift */; };
+		5FA7CF5E94C4D36BF5C3DBFD /* BaseUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA7C310A09EA8FB121B2813 /* BaseUIButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		364E0780279522540085E799 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		364E0786279527600085E799 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		364E0788279527950085E799 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		364E078A27989BB60085E799 /* BaseUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUITextField.swift; sourceTree = "<group>"; };
+		364E078D279927BB0085E799 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		5FA7C310A09EA8FB121B2813 /* BaseUIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseUIButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +62,8 @@
 		364E0771279522530085E799 /* GithubProfileWiki */ = {
 			isa = PBXGroup;
 			children = (
+				364E078C279927A50085E799 /* Extensions */,
+				364E078A27989BB60085E799 /* BaseUITextField.swift */,
 				364E0772279522530085E799 /* AppDelegate.swift */,
 				364E0774279522530085E799 /* SceneDelegate.swift */,
 				364E077B279522540085E799 /* Assets.xcassets */,
@@ -63,8 +71,17 @@
 				364E0780279522540085E799 /* Info.plist */,
 				364E0786279527600085E799 /* SearchViewController.swift */,
 				364E0788279527950085E799 /* FavoritesViewController.swift */,
+				5FA7C310A09EA8FB121B2813 /* BaseUIButton.swift */,
 			);
 			path = GithubProfileWiki;
+			sourceTree = "<group>";
+		};
+		364E078C279927A50085E799 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				364E078D279927BB0085E799 /* UIImage+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,10 +153,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				364E078B27989BB60085E799 /* BaseUITextField.swift in Sources */,
+				364E078E279927BB0085E799 /* UIImage+Extension.swift in Sources */,
 				364E0773279522530085E799 /* AppDelegate.swift in Sources */,
 				364E0787279527600085E799 /* SearchViewController.swift in Sources */,
 				364E0789279527950085E799 /* FavoritesViewController.swift in Sources */,
 				364E0775279522530085E799 /* SceneDelegate.swift in Sources */,
+				5FA7CF5E94C4D36BF5C3DBFD /* BaseUIButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
