@@ -35,5 +35,7 @@ class BaseUITextField: UITextField {
         autocorrectionType = .no
         
         placeholder = "Enter a username."
+        
+        returnKeyType = .done
     }
 }

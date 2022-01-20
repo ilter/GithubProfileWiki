@@ -15,6 +15,7 @@
 		364E0789279527950085E799 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E0788279527950085E799 /* FavoritesViewController.swift */; };
 		364E078B27989BB60085E799 /* BaseUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E078A27989BB60085E799 /* BaseUITextField.swift */; };
 		364E078E279927BB0085E799 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E078D279927BB0085E799 /* UIImage+Extension.swift */; };
+		36F286BB2799302A006F389D /* FollowersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F286BA2799302A006F389D /* FollowersListViewController.swift */; };
 		5FA7CF5E94C4D36BF5C3DBFD /* BaseUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA7C310A09EA8FB121B2813 /* BaseUIButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		364E0788279527950085E799 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		364E078A27989BB60085E799 /* BaseUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUITextField.swift; sourceTree = "<group>"; };
 		364E078D279927BB0085E799 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		36F286BA2799302A006F389D /* FollowersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersListViewController.swift; sourceTree = "<group>"; };
 		5FA7C310A09EA8FB121B2813 /* BaseUIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseUIButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,6 +74,7 @@
 				364E0786279527600085E799 /* SearchViewController.swift */,
 				364E0788279527950085E799 /* FavoritesViewController.swift */,
 				5FA7C310A09EA8FB121B2813 /* BaseUIButton.swift */,
+				36F286BA2799302A006F389D /* FollowersListViewController.swift */,
 			);
 			path = GithubProfileWiki;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 				364E078E279927BB0085E799 /* UIImage+Extension.swift in Sources */,
 				364E0773279522530085E799 /* AppDelegate.swift in Sources */,
 				364E0787279527600085E799 /* SearchViewController.swift in Sources */,
+				36F286BB2799302A006F389D /* FollowersListViewController.swift in Sources */,
 				364E0789279527950085E799 /* FavoritesViewController.swift in Sources */,
 				364E0775279522530085E799 /* SceneDelegate.swift in Sources */,
 				5FA7CF5E94C4D36BF5C3DBFD /* BaseUIButton.swift in Sources */,
