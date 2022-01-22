@@ -9,13 +9,18 @@ import UIKit
 
 class AlertPopupViewController: UIViewController {
     
+    private enum PopUpConstants {
+        static let popUpWidth: CGFloat = 280
+        static let popUpHeight: CGFloat = 220
+    }
+    
     private lazy var containerView: UIView = {
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
         return containerView
     }()
     
-    let titleLabel = BaseTitleLabel(textAlignment: .center, fontSize: 20, fontWeight: .bold)
+    let titleLabel = BaseTitleLabel(textAlignment: .center, fontSize: Constants.Font.mediumFontSize, fontWeight: .bold)
     let messageLabel = BaseBodyLabel(textAlignment: .center)
     let button = BaseUIButton(backgroundColor: .systemPink, title: "OK")
     
@@ -55,57 +60,44 @@ class AlertPopupViewController: UIViewController {
 extension AlertPopupViewController {
     
     private func configureContainerView() {
-        
         containerView.backgroundColor = .systemBackground
-        containerView.layer.cornerRadius = 16
-        containerView.layer.borderWidth = 2
+        containerView.layer.cornerRadius = Constants.Styling.maxCornerRadius
+        containerView.layer.borderWidth = Constants.Styling.minimumBorderWidth
         containerView.layer.borderColor = UIColor.white.cgColor
-        
-        NSLayoutConstraint.activate([
-            containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            containerView.widthAnchor.constraint(equalToConstant: 280),
-            containerView.heightAnchor.constraint(equalToConstant: 220)
-        ])
+    
+        containerView.configureConstraint(centerX: (view.centerXAnchor, .zero), centerY: (view.centerYAnchor, .zero))
+        containerView.configureWidth(width: PopUpConstants.popUpWidth)
+        containerView.configureHeight(height: PopUpConstants.popUpHeight)
     }
     
     private func configureTitleView() {
-        
         titleLabel.text = alertTitle
         
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
-            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
-            titleLabel.bottomAnchor.constraint(equalTo: messageLabel.topAnchor, constant: -10)
-        ])
+        titleLabel.configureConstraint(top: (containerView.topAnchor, Constants.Styling.maxSpacing),
+                                       bottom: (messageLabel.topAnchor, -Constants.Styling.defaultSpacing),
+                                       leading: (containerView.leadingAnchor, Constants.Styling.maxSpacing),
+                                       trailing: (containerView.trailingAnchor, -Constants.Styling.maxSpacing))
     }
     
     private func configureMessageLabel() {
-        
         messageLabel.text = message
         messageLabel.numberOfLines = 4
         
-        NSLayoutConstraint.activate([
-            messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            messageLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            messageLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
-            messageLabel.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -40),
-        ])
+        messageLabel.configureConstraint(top: (titleLabel.bottomAnchor, Constants.Styling.minimumSpacing),
+                                       bottom: (button.topAnchor, -Constants.Styling.maxSpacing),
+                                       leading: (containerView.leadingAnchor, Constants.Styling.maxSpacing),
+                                       trailing: (containerView.trailingAnchor, -Constants.Styling.maxSpacing))
     }
     
     
     private func configureButton() {
-        
         button.setTitle(buttonTitle, for: .normal)
         button.addTarget(self, action: #selector(dismissAlertPopup), for: .touchUpInside)
         
-        NSLayoutConstraint.activate([
-            button.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 12),
-            button.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            button.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
-            button.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20)
-        ])
+        button.configureConstraint(top: (messageLabel.bottomAnchor, Constants.Styling.defaultSpacing),
+                                   bottom: (containerView.bottomAnchor, -Constants.Styling.maxSpacing),
+                                   leading: (containerView.leadingAnchor, Constants.Styling.maxSpacing),
+                                   trailing: (containerView.trailingAnchor, -Constants.Styling.maxSpacing))
     }
     
     @objc private func dismissAlertPopup() {

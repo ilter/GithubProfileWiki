@@ -1,5 +1,5 @@
 //
-//  BaseBodyLabel.swift
+//  BaseUILabel.swift
 //  GithubProfileWiki
 //
 //  Created by ilter on 22.01.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BaseBodyLabel: UILabel {
+class BaseTitleLabel: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -18,18 +18,19 @@ class BaseBodyLabel: UILabel {
         return nil
     }
     
-    init(textAlignment: NSTextAlignment) {
+    init(textAlignment: NSTextAlignment, fontSize: CGFloat, fontWeight: UIFont.Weight) {
         super.init(frame: .zero)
         self.textAlignment = textAlignment
+        self.font = UIFont.systemFont(ofSize: fontSize, weight: fontWeight)
         configureLabel()
     }
     
     private func configureLabel() {
-        textColor = .secondaryLabel
-        font = UIFont.preferredFont(forTextStyle: .body)
+        textColor = .label
         adjustsFontSizeToFitWidth = true
-        minimumScaleFactor = 0.75
-        lineBreakMode = .byWordWrapping
+        minimumScaleFactor = Constants.Styling.defaultScaleFactor
+        lineBreakMode = .byTruncatingTail
         translatesAutoresizingMaskIntoConstraints = false
     }
+
 }

@@ -10,6 +10,19 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
+    private enum ConstraintConstants {
+        static let defaultSpacing: CGFloat = 50.0
+        static let logoImageHeightandWidth: CGFloat = 200.0
+        static let anormousSpacing: CGFloat = 80.0
+    }
+    
+    private enum LabelConstants {
+        static let buttonTitle: String = "Get Followers"
+        static let popupTitle: String = "Enter Username"
+        static let popUpMessage: String = "Please enter a username. We need to know who you are looking for."
+        static let popUpButtonLabel: String = "Close"
+    }
+    
     private lazy var logoImageView: UIImageView = {
         let logoImageView = UIImageView()
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -17,7 +30,7 @@ class SearchViewController: UIViewController {
     }()
     
     let userNameTextField = BaseUITextField()
-    let searchButton = BaseUIButton(backgroundColor: .systemGreen, title: "GetFollowers")
+    let searchButton = BaseUIButton(backgroundColor: .systemGreen, title: LabelConstants.buttonTitle)
     
     var isUserNameEntered: Bool {
         guard let userName = userNameTextField.text else { return false }
@@ -50,34 +63,30 @@ extension SearchViewController {
         view.addSubview(logoImageView)
         logoImageView.image = .githubLogo
         
-        NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
-            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoImageView.heightAnchor.constraint(equalToConstant: 200),
-            logoImageView.widthAnchor.constraint(equalToConstant: 200)
-        ])
+        logoImageView.configureConstraint(top: (view.safeAreaLayoutGuide.topAnchor, ConstraintConstants.anormousSpacing),
+                                          centerX: (view.centerXAnchor, .zero))
+        logoImageView.configureHeight(height: ConstraintConstants.logoImageHeightandWidth)
+        logoImageView.configureWidth(width: ConstraintConstants.logoImageHeightandWidth)
     }
     
     private func configureTextField() {
         view.addSubview(userNameTextField)
         userNameTextField.delegate = self
-        NSLayoutConstraint.activate([
-            userNameTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 48),
-            userNameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            userNameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
-            userNameTextField.heightAnchor.constraint(equalToConstant: 48)
-        ])
+        
+        userNameTextField.configureConstraint(top: (logoImageView.bottomAnchor, ConstraintConstants.defaultSpacing),
+                                              leading: (view.leadingAnchor, ConstraintConstants.defaultSpacing),
+                                              trailing: (view.trailingAnchor, -ConstraintConstants.defaultSpacing))
+        userNameTextField.configureHeight(height: ConstraintConstants.defaultSpacing)
     }
     
     private func configureSearchButton() {
         view.addSubview(searchButton)
         searchButton.addTarget(self, action: #selector(pushFollowersListVC), for: .touchUpInside)
-        NSLayoutConstraint.activate([
-            searchButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
-            searchButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            searchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
-            searchButton.heightAnchor.constraint(equalToConstant:50)
-        ])
+        
+        searchButton.configureConstraint(bottom: (view.safeAreaLayoutGuide.bottomAnchor, -ConstraintConstants.defaultSpacing),
+                                         leading: (view.leadingAnchor, ConstraintConstants.defaultSpacing),
+                                         trailing: (view.trailingAnchor, -ConstraintConstants.defaultSpacing))
+        searchButton.configureHeight(height: ConstraintConstants.defaultSpacing)
     }
     
     private func createDismissKeyboardTapGesture() {
@@ -87,7 +96,9 @@ extension SearchViewController {
     
     @objc private func pushFollowersListVC() {
         guard isUserNameEntered else {
-            presentAlertPopupOnMainThread(title: "Enter Username", message: "Please enter a username. We need to know who you are looking for.", buttonTitle: "Close")
+            presentAlertPopupOnMainThread(title: LabelConstants.popupTitle,
+                                          message: LabelConstants.popUpMessage,
+                                          buttonTitle: LabelConstants.popUpButtonLabel)
             return
         }
         let followersListViewController = FollowersListViewController()

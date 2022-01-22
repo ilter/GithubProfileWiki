@@ -22,9 +22,9 @@ class BaseUIButton: UIButton {
     }
     
     private func configure() {
-        layer.cornerRadius = 10
+        layer.cornerRadius = Constants.Styling.defaultCornerRadius
         titleLabel?.textColor = .white
-        titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
+        titleLabel?.font = Constants.Font.headlineFont
         translatesAutoresizingMaskIntoConstraints = false
     }
 }
