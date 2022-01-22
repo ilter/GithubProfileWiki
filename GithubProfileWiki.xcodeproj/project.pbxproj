@@ -72,17 +72,10 @@
 		364E0771279522530085E799 /* GithubProfileWiki */ = {
 			isa = PBXGroup;
 			children = (
-				36AD8875279C16BA00B0B5D3 /* Reusuables */,
-				364E078C279927A50085E799 /* Extensions */,
-				364E0772279522530085E799 /* AppDelegate.swift */,
-				364E0774279522530085E799 /* SceneDelegate.swift */,
-				364E077B279522540085E799 /* Assets.xcassets */,
-				364E077D279522540085E799 /* LaunchScreen.storyboard */,
-				364E0780279522540085E799 /* Info.plist */,
-				364E0786279527600085E799 /* SearchViewController.swift */,
-				364E0788279527950085E799 /* FavoritesViewController.swift */,
-				36F286BA2799302A006F389D /* FollowersListViewController.swift */,
-				36AD887A279C198D00B0B5D3 /* AlertPopupViewController.swift */,
+				365931BB279C3F2000834D25 /* ProjectFiles */,
+				365931BA279C3F0F00834D25 /* StylingResources */,
+				365931B9279C3EE900834D25 /* Screens */,
+				36AD8875279C16BA00B0B5D3 /* Reusables */,
 			);
 			path = GithubProfileWiki;
 			sourceTree = "<group>";
@@ -96,15 +89,46 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		36AD8875279C16BA00B0B5D3 /* Reusuables */ = {
+		365931B9279C3EE900834D25 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				364E0786279527600085E799 /* SearchViewController.swift */,
+				364E0788279527950085E799 /* FavoritesViewController.swift */,
+				36F286BA2799302A006F389D /* FollowersListViewController.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		365931BA279C3F0F00834D25 /* StylingResources */ = {
+			isa = PBXGroup;
+			children = (
+				364E077B279522540085E799 /* Assets.xcassets */,
+				364E077D279522540085E799 /* LaunchScreen.storyboard */,
+			);
+			path = StylingResources;
+			sourceTree = "<group>";
+		};
+		365931BB279C3F2000834D25 /* ProjectFiles */ = {
+			isa = PBXGroup;
+			children = (
+				364E0774279522530085E799 /* SceneDelegate.swift */,
+				364E0780279522540085E799 /* Info.plist */,
+				364E0772279522530085E799 /* AppDelegate.swift */,
+			);
+			path = ProjectFiles;
+			sourceTree = "<group>";
+		};
+		36AD8875279C16BA00B0B5D3 /* Reusables */ = {
+			isa = PBXGroup;
+			children = (
+				364E078C279927A50085E799 /* Extensions */,
+				36AD887A279C198D00B0B5D3 /* AlertPopupViewController.swift */,
 				364E078A27989BB60085E799 /* BaseUITextField.swift */,
 				5FA7C310A09EA8FB121B2813 /* BaseUIButton.swift */,
 				36AD8876279C16D000B0B5D3 /* BaseTitleLabel.swift */,
 				36AD8878279C183200B0B5D3 /* BaseBodyLabel.swift */,
 			);
-			path = Reusuables;
+			path = Reusables;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,7 +351,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = GithubProfileWiki/Info.plist;
+				INFOPLIST_FILE = GithubProfileWiki/ProjectFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -346,7 +370,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = GithubProfileWiki/Info.plist;
+				INFOPLIST_FILE = GithubProfileWiki/ProjectFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
