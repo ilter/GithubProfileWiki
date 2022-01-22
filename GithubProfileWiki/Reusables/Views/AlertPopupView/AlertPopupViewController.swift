@@ -48,7 +48,7 @@ class AlertPopupViewController: UIViewController {
     
     private func setupUI() {
         view.addSubview(containerView)
-        [titleLabel, messageLabel, button].compactMap{ containerView.addSubview($0) }
+        [titleLabel, messageLabel, button].forEach{ containerView.addSubview($0) }
         
         configureContainerView()
         configureTitleView()
