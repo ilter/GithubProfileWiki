@@ -26,9 +26,9 @@ class BaseBodyLabel: UILabel {
     
     private func configureLabel() {
         textColor = .secondaryLabel
-        font = UIFont.preferredFont(forTextStyle: .body)
+        font = Constants.Font.bodyFont
         adjustsFontSizeToFitWidth = true
-        minimumScaleFactor = 0.75
+        minimumScaleFactor = Constants.Styling.minScaleFactor
         lineBreakMode = .byWordWrapping
         translatesAutoresizingMaskIntoConstraints = false
     }

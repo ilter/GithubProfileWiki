@@ -28,7 +28,7 @@ class BaseTitleLabel: UILabel {
     private func configureLabel() {
         textColor = .label
         adjustsFontSizeToFitWidth = true
-        minimumScaleFactor = 0.9
+        minimumScaleFactor = Constants.Styling.defaultScaleFactor
         lineBreakMode = .byTruncatingTail
         translatesAutoresizingMaskIntoConstraints = false
     }

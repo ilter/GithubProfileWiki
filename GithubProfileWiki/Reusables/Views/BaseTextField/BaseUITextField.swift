@@ -20,8 +20,8 @@ class BaseUITextField: UITextField {
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
-        layer.cornerRadius = 10
-        layer.borderWidth = 2
+        layer.cornerRadius = Constants.Styling.defaultCornerRadius
+        layer.borderWidth = Constants.Styling.minimumBorderWidth
         layer.borderColor = UIColor.systemGray4.cgColor
         
         
@@ -30,11 +30,11 @@ class BaseUITextField: UITextField {
         textAlignment = .center
         font = UIFont.preferredFont(forTextStyle: .title2)
         adjustsFontSizeToFitWidth = true
-        minimumFontSize = 12
+        minimumFontSize = Constants.Font.minimumFontSize
         
         autocorrectionType = .no
         
-        placeholder = "Enter a username."
+        placeholder = Constants.InfoTexts.textFieldPlacehorder
         
         returnKeyType = .done
     }
