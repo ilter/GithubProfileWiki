@@ -15,6 +15,7 @@
 		364E0789279527950085E799 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E0788279527950085E799 /* FavoritesViewController.swift */; };
 		364E078B27989BB60085E799 /* BaseUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E078A27989BB60085E799 /* BaseUITextField.swift */; };
 		364E078E279927BB0085E799 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E078D279927BB0085E799 /* UIImage+Extension.swift */; };
+		365931BE279C409F00834D25 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365931BD279C409F00834D25 /* Constants.swift */; };
 		36AD8877279C16D000B0B5D3 /* BaseTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AD8876279C16D000B0B5D3 /* BaseTitleLabel.swift */; };
 		36AD8879279C183200B0B5D3 /* BaseBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AD8878279C183200B0B5D3 /* BaseBodyLabel.swift */; };
 		36AD887B279C198D00B0B5D3 /* AlertPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AD887A279C198D00B0B5D3 /* AlertPopupViewController.swift */; };
@@ -34,6 +35,7 @@
 		364E0788279527950085E799 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		364E078A27989BB60085E799 /* BaseUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUITextField.swift; sourceTree = "<group>"; };
 		364E078D279927BB0085E799 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		365931BD279C409F00834D25 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		36AD8876279C16D000B0B5D3 /* BaseTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTitleLabel.swift; sourceTree = "<group>"; };
 		36AD8878279C183200B0B5D3 /* BaseBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBodyLabel.swift; sourceTree = "<group>"; };
 		36AD887A279C198D00B0B5D3 /* AlertPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPopupViewController.swift; sourceTree = "<group>"; };
@@ -72,10 +74,10 @@
 		364E0771279522530085E799 /* GithubProfileWiki */ = {
 			isa = PBXGroup;
 			children = (
+				36AD8875279C16BA00B0B5D3 /* Reusables */,
+				365931B9279C3EE900834D25 /* Screens */,
 				365931BB279C3F2000834D25 /* ProjectFiles */,
 				365931BA279C3F0F00834D25 /* StylingResources */,
-				365931B9279C3EE900834D25 /* Screens */,
-				36AD8875279C16BA00B0B5D3 /* Reusables */,
 			);
 			path = GithubProfileWiki;
 			sourceTree = "<group>";
@@ -92,9 +94,9 @@
 		365931B9279C3EE900834D25 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				364E0786279527600085E799 /* SearchViewController.swift */,
-				364E0788279527950085E799 /* FavoritesViewController.swift */,
-				36F286BA2799302A006F389D /* FollowersListViewController.swift */,
+				365931C7279C412600834D25 /* FollowersList */,
+				365931C6279C411D00834D25 /* Favorites */,
+				365931C5279C411600834D25 /* Search */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -118,15 +120,96 @@
 			path = ProjectFiles;
 			sourceTree = "<group>";
 		};
+		365931BC279C409500834D25 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				365931BD279C409F00834D25 /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		365931BF279C40BC00834D25 /* BaseButton */ = {
+			isa = PBXGroup;
+			children = (
+				5FA7C310A09EA8FB121B2813 /* BaseUIButton.swift */,
+			);
+			path = BaseButton;
+			sourceTree = "<group>";
+		};
+		365931C0279C40CB00834D25 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				365931C4279C40F500834D25 /* AlertPopupView */,
+				365931C3279C40E900834D25 /* BaseBodyLabel */,
+				365931C2279C40DE00834D25 /* BaseTitleLabel */,
+				365931C1279C40D300834D25 /* BaseTextField */,
+				365931BF279C40BC00834D25 /* BaseButton */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		365931C1279C40D300834D25 /* BaseTextField */ = {
+			isa = PBXGroup;
+			children = (
+				364E078A27989BB60085E799 /* BaseUITextField.swift */,
+			);
+			path = BaseTextField;
+			sourceTree = "<group>";
+		};
+		365931C2279C40DE00834D25 /* BaseTitleLabel */ = {
+			isa = PBXGroup;
+			children = (
+				36AD8876279C16D000B0B5D3 /* BaseTitleLabel.swift */,
+			);
+			path = BaseTitleLabel;
+			sourceTree = "<group>";
+		};
+		365931C3279C40E900834D25 /* BaseBodyLabel */ = {
+			isa = PBXGroup;
+			children = (
+				36AD8878279C183200B0B5D3 /* BaseBodyLabel.swift */,
+			);
+			path = BaseBodyLabel;
+			sourceTree = "<group>";
+		};
+		365931C4279C40F500834D25 /* AlertPopupView */ = {
+			isa = PBXGroup;
+			children = (
+				36AD887A279C198D00B0B5D3 /* AlertPopupViewController.swift */,
+			);
+			path = AlertPopupView;
+			sourceTree = "<group>";
+		};
+		365931C5279C411600834D25 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				364E0786279527600085E799 /* SearchViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		365931C6279C411D00834D25 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				364E0788279527950085E799 /* FavoritesViewController.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		365931C7279C412600834D25 /* FollowersList */ = {
+			isa = PBXGroup;
+			children = (
+				36F286BA2799302A006F389D /* FollowersListViewController.swift */,
+			);
+			path = FollowersList;
+			sourceTree = "<group>";
+		};
 		36AD8875279C16BA00B0B5D3 /* Reusables */ = {
 			isa = PBXGroup;
 			children = (
+				365931C0279C40CB00834D25 /* Views */,
+				365931BC279C409500834D25 /* Constants */,
 				364E078C279927A50085E799 /* Extensions */,
-				36AD887A279C198D00B0B5D3 /* AlertPopupViewController.swift */,
-				364E078A27989BB60085E799 /* BaseUITextField.swift */,
-				5FA7C310A09EA8FB121B2813 /* BaseUIButton.swift */,
-				36AD8876279C16D000B0B5D3 /* BaseTitleLabel.swift */,
-				36AD8878279C183200B0B5D3 /* BaseBodyLabel.swift */,
 			);
 			path = Reusables;
 			sourceTree = "<group>";
@@ -207,6 +290,7 @@
 				364E0773279522530085E799 /* AppDelegate.swift in Sources */,
 				364E0787279527600085E799 /* SearchViewController.swift in Sources */,
 				36F286BB2799302A006F389D /* FollowersListViewController.swift in Sources */,
+				365931BE279C409F00834D25 /* Constants.swift in Sources */,
 				364E0789279527950085E799 /* FavoritesViewController.swift in Sources */,
 				36AD8879279C183200B0B5D3 /* BaseBodyLabel.swift in Sources */,
 				36AD887B279C198D00B0B5D3 /* AlertPopupViewController.swift in Sources */,
