@@ -87,7 +87,7 @@ extension SearchViewController {
     
     @objc private func pushFollowersListVC() {
         guard isUserNameEntered else {
-            print("No Username")
+            presentAlertPopupOnMainThread(title: "Enter Username", message: "Please enter a username. We need to know who you are looking for.", buttonTitle: "Close")
             return
         }
         let followersListViewController = FollowersListViewController()
