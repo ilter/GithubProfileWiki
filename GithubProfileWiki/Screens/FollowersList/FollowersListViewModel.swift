@@ -13,7 +13,7 @@ class FollowersListViewModel {
         
         let apiService = APIService(apiRequest: request)
         apiService.submitRequest(requestData: param) { (model, error) in
-            if let _ = error {
+            if error != nil {
                 completion(nil, error)
             } else {
                 completion(model, nil)

@@ -7,22 +7,13 @@
 
 import Foundation
 
-#if DEBUG
-let environment = Environment.development
-#else
-let environment = Environment.production
-#endif
-
-
-private let baseURL = environment.baseUrl()
-
-struct Path {
+struct URLPath {
     
     var userName: String
     
-    var path: String {
-            return "\(baseURL)/users/\(userName)/followers"
-        }
+    var followersUrl: String {
+        return "\(Environment().baseUrl)/users/\(userName)/followers"
+    }
 }
 
     

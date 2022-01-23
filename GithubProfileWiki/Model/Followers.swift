@@ -8,8 +8,8 @@
 import Foundation
 
 struct Follower: Codable {
-    var login: String
-    var avatarUrl: String
+    var login: String?
+    var avatarUrl: String?
 }
 
 typealias Followers = [Follower]

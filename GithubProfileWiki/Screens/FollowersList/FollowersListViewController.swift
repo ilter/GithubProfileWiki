@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FollowersListViewController: UIViewController {
+final class FollowersListViewController: UIViewController {
     var username: String?
     var followerListViewModel = FollowersListViewModel()
     
@@ -16,6 +16,7 @@ class FollowersListViewController: UIViewController {
 
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.setNavigationBarHidden(false, animated: true)
         title = username
     }
     
@@ -30,10 +31,9 @@ class FollowersListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        
+      
         followerListViewModel.fetchFollowers(userName: username ?? "", param: [:]) { (model, error) in
-            if let _ = error {
+            if error != nil {
                 self.presentAlertPopupOnMainThread(title: "Error", message: error?.localizedDescription ?? "Hata", buttonTitle: "Close")
             } else {
                 if let viewModel = model {

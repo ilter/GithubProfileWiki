@@ -6,9 +6,11 @@
 //
 
 import Foundation
-struct NetworkConstants {
-    struct APIHeaders{
-        static var defaultContentType = "Content-Type"
-        static var defaultContentTypeValue = "application/json"
+
+enum NetworkConstants {
+    
+    enum APIHeaders {
+        static let defaultContentType = "Content-Type"
+        static let defaultContentTypeValue = "application/json"
     }
 }

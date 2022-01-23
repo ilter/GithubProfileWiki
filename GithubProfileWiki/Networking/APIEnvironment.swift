@@ -7,27 +7,21 @@
 
 import Foundation
 
-enum Environment {
-    case development
-    case production
+struct Environment {
     
-    func baseUrl() -> String {
-        return "https://\(subdomain()).\(domain())"
+    var method: String {
+        "https://"
     }
     
-    func domain() -> String {
-        switch self {
-        case .development:
-            return "github.com"
-        case .production:
-            return "github.com"
-        }
+    var domain: String {
+        "github.com"
     }
     
-    func subdomain() -> String {
-        switch self {
-        case .development, .production:
-            return "api"
-        }
+    var subdomain: String {
+        "api"
+    }
+    
+    var baseUrl: String {
+        "\(method)\(subdomain).\(domain)"
     }
 }

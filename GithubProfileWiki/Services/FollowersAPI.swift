@@ -11,15 +11,12 @@ struct FollowersAPI: APIHandler {
     var userName: String
     
     func submitRequest(from param: [String: Any]) -> URLRequest? {
-        
-        let urlString = Path(userName: userName).path
+        let urlString = URLPath(userName: userName).followersUrl
         if var url = URL(string: urlString) {
-            if param.count > 0 {
-                url = setQueryParams(parameters: param, url: url)
-            }
+            url = setQueryParams(parameters: param, url: url)
             var urlRequest = URLRequest(url: url)
             setDefaultHeaderParams(request: &urlRequest)
-            urlRequest.httpMethod = HTTPMethod.GET.rawValue
+            urlRequest.httpMethod = HTTPMethod.get.rawValue
             return urlRequest
         }
             return nil

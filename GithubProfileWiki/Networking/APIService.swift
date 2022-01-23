@@ -7,7 +7,7 @@
 
 import Foundation
 
-class APIService<T: APIHandler> {
+final class APIService<T: APIHandler> {
     let apiRequest: T
     let urlSession: URLSession
     
