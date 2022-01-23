@@ -101,7 +101,7 @@ extension SearchViewController {
                                           buttonTitle: LabelConstants.popUpButtonLabel)
             return
         }
-        let followersListViewController = FollowersListViewController()
+        let followersListViewController = FollowersListViewController(userName: userNameTextField.text!)
         followersListViewController.username = userNameTextField.text
         navigationController?.pushViewController(followersListViewController, animated: true)
     }
