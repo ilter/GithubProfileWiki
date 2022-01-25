@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3609175B279F609A0031FF14 /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3609175A279F609A0031FF14 /* FollowerCell.swift */; };
+		3609175E279F62550031FF14 /* BaseImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3609175D279F62550031FF14 /* BaseImageView.swift */; };
 		364E0773279522530085E799 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E0772279522530085E799 /* AppDelegate.swift */; };
 		364E0775279522530085E799 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E0774279522530085E799 /* SceneDelegate.swift */; };
 		364E077C279522540085E799 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 364E077B279522540085E799 /* Assets.xcassets */; };
@@ -36,6 +38,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3609175A279F609A0031FF14 /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
+		3609175D279F62550031FF14 /* BaseImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseImageView.swift; sourceTree = "<group>"; };
 		364E076F279522530085E799 /* GithubProfileWiki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubProfileWiki.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		364E0772279522530085E799 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		364E0774279522530085E799 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +81,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3609175C279F623E0031FF14 /* BaseImageView */ = {
+			isa = PBXGroup;
+			children = (
+				3609175D279F62550031FF14 /* BaseImageView.swift */,
+			);
+			path = BaseImageView;
+			sourceTree = "<group>";
+		};
 		364E0766279522530085E799 = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +177,7 @@
 		365931C0279C40CB00834D25 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3609175C279F623E0031FF14 /* BaseImageView */,
 				365931C4279C40F500834D25 /* AlertPopupView */,
 				365931C3279C40E900834D25 /* BaseBodyLabel */,
 				365931C2279C40DE00834D25 /* BaseTitleLabel */,
@@ -227,6 +240,7 @@
 			children = (
 				36F286BA2799302A006F389D /* FollowersListViewController.swift */,
 				368CD932279D9937003FABA6 /* FollowersListViewModel.swift */,
+				3609175A279F609A0031FF14 /* FollowerCell.swift */,
 			);
 			path = FollowersList;
 			sourceTree = "<group>";
@@ -349,6 +363,7 @@
 				368CD92E279D9347003FABA6 /* FollowersAPI.swift in Sources */,
 				36AD8877279C16D000B0B5D3 /* BaseTitleLabel.swift in Sources */,
 				364E0773279522530085E799 /* AppDelegate.swift in Sources */,
+				3609175E279F62550031FF14 /* BaseImageView.swift in Sources */,
 				364E0787279527600085E799 /* SearchViewController.swift in Sources */,
 				36F286BB2799302A006F389D /* FollowersListViewController.swift in Sources */,
 				368CD920279D8C0C003FABA6 /* RequestHandler+Extension.swift in Sources */,
@@ -357,6 +372,7 @@
 				364E0789279527950085E799 /* FavoritesViewController.swift in Sources */,
 				36AD8879279C183200B0B5D3 /* BaseBodyLabel.swift in Sources */,
 				36AD887B279C198D00B0B5D3 /* AlertPopupViewController.swift in Sources */,
+				3609175B279F609A0031FF14 /* FollowerCell.swift in Sources */,
 				368CD91E279D8B45003FABA6 /* APIHandler.swift in Sources */,
 				364E0775279522530085E799 /* SceneDelegate.swift in Sources */,
 				368CD924279D8D7D003FABA6 /* ResponseHandler+Extension.swift in Sources */,
