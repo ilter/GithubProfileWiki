@@ -21,14 +21,15 @@ final class APIService<T: APIHandler> {
             urlSession.dataTask(with: urlRequest) { ( data, response, error) in
                 guard let data = data,
                       let httpResponse = response as? HTTPURLResponse else {
-                          return completionHandler(nil, error)
-                      }
-                
-                do {
-                    let parsedResponse = try self.apiRequest.parseResponse(data: data, response: httpResponse)
-                    completionHandler(parsedResponse, nil)
-                } catch {
-                    completionHandler(nil, error)
+                    return completionHandler(nil, error)
+                }
+                DispatchQueue.main.async {
+                    do {
+                        let parsedResponse = try self.apiRequest.parseResponse(data: data, response: httpResponse)
+                        completionHandler(parsedResponse, nil)
+                    } catch {
+                        completionHandler(nil, error)
+                    }
                 }
             }.resume()
         }
