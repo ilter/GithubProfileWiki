@@ -46,7 +46,7 @@ class SearchViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     private func setupUI() {
@@ -101,7 +101,7 @@ extension SearchViewController {
                                           buttonTitle: LabelConstants.popUpButtonLabel)
             return
         }
-        let followersListViewController = FollowersListViewController()
+        let followersListViewController = FollowersListViewController(userName: userNameTextField.text!)
         followersListViewController.username = userNameTextField.text
         navigationController?.pushViewController(followersListViewController, animated: true)
     }
