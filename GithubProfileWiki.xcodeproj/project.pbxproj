@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -33,6 +33,7 @@
 		36AD8879279C183200B0B5D3 /* BaseBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AD8878279C183200B0B5D3 /* BaseBodyLabel.swift */; };
 		36AD887B279C198D00B0B5D3 /* AlertPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AD887A279C198D00B0B5D3 /* AlertPopupViewController.swift */; };
 		36AD887D279C25E900B0B5D3 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AD887C279C25E900B0B5D3 /* UIViewController+Extension.swift */; };
+		36DEEC2F27AC95750058EEDE /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 36DEEC2E27AC95750058EEDE /* Kingfisher */; };
 		36F286BB2799302A006F389D /* FollowersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F286BA2799302A006F389D /* FollowersListViewController.swift */; };
 		5FA7CF5E94C4D36BF5C3DBFD /* BaseUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA7C310A09EA8FB121B2813 /* BaseUIButton.swift */; };
 /* End PBXBuildFile section */
@@ -75,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36DEEC2F27AC95750058EEDE /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +303,9 @@
 			dependencies = (
 			);
 			name = GithubProfileWiki;
+			packageProductDependencies = (
+				36DEEC2E27AC95750058EEDE /* Kingfisher */,
+			);
 			productName = GithubProfileWiki;
 			productReference = 364E076F279522530085E799 /* GithubProfileWiki.app */;
 			productType = "com.apple.product-type.application";
@@ -328,6 +333,9 @@
 				Base,
 			);
 			mainGroup = 364E0766279522530085E799;
+			packageReferences = (
+				36DEEC2D27AC95750058EEDE /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 364E0770279522530085E799 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -573,6 +581,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		36DEEC2D27AC95750058EEDE /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		36DEEC2E27AC95750058EEDE /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 36DEEC2D27AC95750058EEDE /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 364E0767279522530085E799 /* Project object */;
 }
