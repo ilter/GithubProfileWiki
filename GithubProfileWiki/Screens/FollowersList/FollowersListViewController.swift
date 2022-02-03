@@ -16,24 +16,17 @@ final class FollowersListViewController: UIViewController {
     var username: String?
     var followerListViewModel = FollowersListViewModel()
     var collectionView: UICollectionView!
-    var dataSource: UICollectionViewDiffableDataSource<Section, Follower>
+    var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
+    var followers: [Follower] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
         configureCollectionView()
+        configureDataSource()
         
         guard let username = username else { return }
         getFollowers(username: username)
-    }
-    
-    init(userName: String) {
-        super.init(nibName: nil, bundle: nil)
-        self.username = userName
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     
@@ -48,14 +41,31 @@ final class FollowersListViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
         title = username
     }
+
+    func getFollowers(username: String) {
+        followerListViewModel.fetchFollowers(userName: username, param: [:]) { (model, error) in
+            if error != nil {
+                self.presentAlertPopupOnMainThread(title: "Error", message: error?.localizedDescription ?? "Hata", buttonTitle: "Close")
+            } else {
+                if let viewModel = model {
+                    self.followers = viewModel
+                    self.updateData()
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Configure CollectionView
+
+extension FollowersListViewController {
     
     func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createThreeColumnFlowLayout())
         view.addSubview(collectionView)
-        collectionView.backgroundColor = .systemPink
+        collectionView.backgroundColor = .systemBackground
         collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.reuseIdentifier)
     }
-    
     
     func createThreeColumnFlowLayout() -> UICollectionViewFlowLayout {
         let width = view.bounds.width
@@ -70,18 +80,23 @@ final class FollowersListViewController: UIViewController {
                                                right: Constants.Styling.defaultSpacing)
         flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth + 48)
         
-        return UICollectionViewFlowLayout()
+        return flowLayout
     }
     
-    func getFollowers(username: String) {
-        followerListViewModel.fetchFollowers(userName: username, param: [:]) { (model, error) in
-            if error != nil {
-                self.presentAlertPopupOnMainThread(title: "Error", message: error?.localizedDescription ?? "Hata", buttonTitle: "Close")
-            } else {
-                if let viewModel = model {
-                    print(viewModel)
-                }
-            }
+    func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, Follower>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, follower ) -> UICollectionViewCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowerCell.reuseIdentifier, for: indexPath) as? FollowerCell
+            cell?.set(follower: follower)
+            return cell
+        })
+    }
+    
+    func updateData() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(followers)
+        DispatchQueue.main.async {
+            self.dataSource.apply(snapshot, animatingDifferences: true)
         }
     }
 }
