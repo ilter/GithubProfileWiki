@@ -1,16 +1,16 @@
-name: SwiftLint starter
+name: SwiftLint
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
+    paths:
+      - '.github/workflows/swiftlint.yml'
+      - '.swiftlint.yml'
+      - '**/*.swift'
 
 jobs:
-  build:
-    name: Build and Test default scheme using any available iPhone simulator
-    runs-on: macos-latest
-
+  SwiftLint:
+    runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v1
       - name: GitHub Action for SwiftLint
-        uses: norio-nomura/action-swiftlint@3.2.1
+        uses: norio-nomura/action-swiftlint@master
