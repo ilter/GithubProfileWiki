@@ -43,13 +43,14 @@ final class FollowersListViewController: UIViewController {
     }
 
     func getFollowers(username: String) {
-        followerListViewModel.fetchFollowers(userName: username, param: [:]) { (model, error) in
+        followerListViewModel.fetchFollowers(userName: username, param: [:]) { [weak self] (model, error) in
+            guard let strongSelf = self else { return }
             if error != nil {
-                self.presentAlertPopupOnMainThread(title: "Error", message: error?.localizedDescription ?? "Hata", buttonTitle: "Close")
+                strongSelf.presentAlertPopupOnMainThread(title: "Error", message: error?.localizedDescription ?? "Hata", buttonTitle: "Close")
             } else {
                 if let viewModel = model {
-                    self.followers = viewModel
-                    self.updateData()
+                    strongSelf.followers = viewModel
+                    strongSelf.updateData()
                 }
             }
         }

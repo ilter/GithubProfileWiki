@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class BaseImageView: UIImageView {
 
@@ -25,5 +26,9 @@ class BaseImageView: UIImageView {
         clipsToBounds = true
         image = placeholderImage
         translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    func setImage(from urlString: String) {
+        kf.setImage(with: URL(string: urlString))
     }
 }

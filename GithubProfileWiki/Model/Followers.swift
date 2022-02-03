@@ -9,7 +9,7 @@ import Foundation
 
 struct Follower: Codable, Hashable {
     var login: String?
-    var avatarUrl: String?
+    var avatarUrl: String
 }
 
 typealias Followers = [Follower]
