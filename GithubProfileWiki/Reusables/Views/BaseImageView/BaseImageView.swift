@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Kingfisher
+//import Kingfisher
 
 class BaseImageView: UIImageView {
 
@@ -29,6 +29,6 @@ class BaseImageView: UIImageView {
     }
     
     func setImage(from urlString: String) {
-        kf.setImage(with: URL(string: urlString))
+        //kf.setImage(with: URL(string: urlString))
     }
 }
