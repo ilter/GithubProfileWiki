@@ -53,9 +53,10 @@ final class FollowersListViewController: UIViewController {
     func getFollowers(username: String, page: Int) {
         let queryParams: [String: Any] = [RequestConstantValues.page.rawValue: page,
                                     RequestConstantValues.perPage.rawValue: RequestConstantValues.followersPerPage]
-        
+        showLoadingViewWithActivityIndicator()
         followerListViewModel.fetchFollowers(userName: username, param: queryParams) { [weak self] (model, error) in
             guard let strongSelf = self else { return }
+            strongSelf.dismissLoadingView()
             if error != nil {
                 strongSelf.presentAlertPopupOnMainThread(title: "Error", message: error?.localizedDescription ?? "Hata", buttonTitle: "Close")
             } else {
