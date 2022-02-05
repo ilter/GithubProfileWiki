@@ -19,6 +19,14 @@ final class FollowersListViewController: UIViewController {
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
     var followers: [Follower] = []
     
+    private enum RequestConstantValues: String {
+        static var pageNum: Int = 1
+        static var hasMoreFollower: Bool = true
+        static var followersPerPage: Int = 30
+        case page
+        case perPage = "per_page"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
@@ -26,7 +34,7 @@ final class FollowersListViewController: UIViewController {
         configureDataSource()
         
         guard let username = username else { return }
-        getFollowers(username: username)
+        getFollowers(username: username, page: RequestConstantValues.pageNum)
     }
     
     
@@ -42,20 +50,43 @@ final class FollowersListViewController: UIViewController {
         title = username
     }
 
-    func getFollowers(username: String) {
-        followerListViewModel.fetchFollowers(userName: username, param: [:]) { [weak self] (model, error) in
+    func getFollowers(username: String, page: Int) {
+        let queryParams: [String: Any] = [RequestConstantValues.page.rawValue: page,
+                                    RequestConstantValues.perPage.rawValue: RequestConstantValues.followersPerPage]
+        
+        followerListViewModel.fetchFollowers(userName: username, param: queryParams) { [weak self] (model, error) in
             guard let strongSelf = self else { return }
             if error != nil {
                 strongSelf.presentAlertPopupOnMainThread(title: "Error", message: error?.localizedDescription ?? "Hata", buttonTitle: "Close")
             } else {
                 if let viewModel = model {
-                    strongSelf.followers = viewModel
+                    if viewModel.count == .zero {
+                        RequestConstantValues.hasMoreFollower = false
+                        RequestConstantValues.pageNum = .zero
+                        return
+                    }
+                    strongSelf.followers.append(contentsOf: viewModel)
                     strongSelf.updateData()
                 }
             }
         }
     }
 }
+
+extension FollowersListViewController: UICollectionViewDelegate {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - height {
+            guard RequestConstantValues.hasMoreFollower else { return }
+            RequestConstantValues.pageNum += 1
+            getFollowers(username: username!, page: RequestConstantValues.pageNum)
+        }
+    }
+}
+
 
 // MARK: - Configure CollectionView
 
@@ -64,6 +95,7 @@ extension FollowersListViewController {
     func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createThreeColumnFlowLayout())
         view.addSubview(collectionView)
+        collectionView.delegate = self
         collectionView.backgroundColor = .systemBackground
         collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.reuseIdentifier)
     }
