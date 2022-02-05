@@ -64,6 +64,7 @@ final class FollowersListViewController: UIViewController {
                     if viewModel.count == .zero {
                         RequestConstantValues.hasMoreFollower = false
                         RequestConstantValues.pageNum = .zero
+                        strongSelf.showEmptyStateView(with: "This User does not have any followers.😞", in: strongSelf.view)
                         return
                     }
                     strongSelf.followers.append(contentsOf: viewModel)
