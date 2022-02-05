@@ -18,15 +18,25 @@ final class FollowersListViewController: UIViewController {
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
     var followers: [Follower] = []
+    var filteredFollowers: [Follower] = []
+    
+    private enum RequestConstantValues: String {
+        static var pageNum: Int = 1
+        static var hasMoreFollower: Bool = true
+        static var followersPerPage: Int = 30
+        case page
+        case perPage = "per_page"
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
+        configureSearchController()
         configureCollectionView()
         configureDataSource()
         
         guard let username = username else { return }
-        getFollowers(username: username)
+        getFollowers(username: username, page: RequestConstantValues.pageNum)
     }
     
     
@@ -42,15 +52,25 @@ final class FollowersListViewController: UIViewController {
         title = username
     }
 
-    func getFollowers(username: String) {
-        followerListViewModel.fetchFollowers(userName: username, param: [:]) { [weak self] (model, error) in
+    func getFollowers(username: String, page: Int) {
+        let queryParams: [String: Any] = [RequestConstantValues.page.rawValue: page,
+                                    RequestConstantValues.perPage.rawValue: RequestConstantValues.followersPerPage]
+        showLoadingViewWithActivityIndicator()
+        followerListViewModel.fetchFollowers(userName: username, param: queryParams) { [weak self] (model, error) in
             guard let strongSelf = self else { return }
+            strongSelf.dismissLoadingView()
             if error != nil {
                 strongSelf.presentAlertPopupOnMainThread(title: "Error", message: error?.localizedDescription ?? "Hata", buttonTitle: "Close")
             } else {
                 if let viewModel = model {
-                    strongSelf.followers = viewModel
-                    strongSelf.updateData()
+                    if viewModel.count == .zero {
+                        RequestConstantValues.hasMoreFollower = false
+                        RequestConstantValues.pageNum = .zero
+                        strongSelf.showEmptyStateView(with: "This User does not have any followers.😞", in: strongSelf.view)
+                        return
+                    }
+                    strongSelf.followers.append(contentsOf: viewModel)
+                    strongSelf.updateData(on: strongSelf.followers)
                 }
             }
         }
@@ -64,8 +84,17 @@ extension FollowersListViewController {
     func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createThreeColumnFlowLayout())
         view.addSubview(collectionView)
+        collectionView.delegate = self
         collectionView.backgroundColor = .systemBackground
         collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.reuseIdentifier)
+    }
+    
+    func configureSearchController() {
+        let searchController = UISearchController()
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "Search for a username"
+        navigationItem.searchController = searchController
     }
     
     func createThreeColumnFlowLayout() -> UICollectionViewFlowLayout {
@@ -92,12 +121,44 @@ extension FollowersListViewController {
         })
     }
     
-    func updateData() {
+    func updateData(on followers: [Follower]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
         snapshot.appendSections([.main])
         snapshot.appendItems(followers)
         DispatchQueue.main.async {
             self.dataSource.apply(snapshot, animatingDifferences: true)
         }
+    }
+}
+
+// MARK: - CollectionView Delegate
+
+extension FollowersListViewController: UICollectionViewDelegate {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - height {
+            guard RequestConstantValues.hasMoreFollower else { return }
+            RequestConstantValues.pageNum += 1
+            getFollowers(username: username!, page: RequestConstantValues.pageNum)
+        }
+    }
+}
+
+// MARK: - Search Controller Delegate
+
+extension FollowersListViewController: UISearchResultsUpdating, UISearchBarDelegate {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let filter = searchController.searchBar.text,
+              !filter.isEmpty else {return}
+        
+        filteredFollowers = followers.filter {$0.login.lowercased().contains(filter.lowercased())}
+        updateData(on: filteredFollowers)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        updateData(on: followers)
     }
 }
