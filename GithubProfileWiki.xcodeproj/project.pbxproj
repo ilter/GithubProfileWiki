@@ -11,6 +11,11 @@
 		3609175E279F62550031FF14 /* BaseImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3609175D279F62550031FF14 /* BaseImageView.swift */; };
 		363BF5A327ADD9F3005028C1 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 363BF5A227ADD9F3005028C1 /* Kingfisher */; };
 		363F40BB27AEE9C5006C79AB /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363F40BA27AEE9C5006C79AB /* EmptyStateView.swift */; };
+		363F40BE27AF174A006C79AB /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363F40BD27AF174A006C79AB /* UserInfoViewController.swift */; };
+		363F40C027AF1C2F006C79AB /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363F40BF27AF1C2F006C79AB /* UserAPI.swift */; };
+		363F40C227AF1C80006C79AB /* UserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363F40C127AF1C80006C79AB /* UserInfoViewModel.swift */; };
+		363F40C427AF1CA3006C79AB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363F40C327AF1CA3006C79AB /* User.swift */; };
+		363F40C727AF28F9006C79AB /* UserInfoHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363F40C627AF28F9006C79AB /* UserInfoHeaderViewController.swift */; };
 		364E0773279522530085E799 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E0772279522530085E799 /* AppDelegate.swift */; };
 		364E0775279522530085E799 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E0774279522530085E799 /* SceneDelegate.swift */; };
 		364E077C279522540085E799 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 364E077B279522540085E799 /* Assets.xcassets */; };
@@ -43,6 +48,11 @@
 		3609175A279F609A0031FF14 /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
 		3609175D279F62550031FF14 /* BaseImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseImageView.swift; sourceTree = "<group>"; };
 		363F40BA27AEE9C5006C79AB /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		363F40BD27AF174A006C79AB /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
+		363F40BF27AF1C2F006C79AB /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
+		363F40C127AF1C80006C79AB /* UserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewModel.swift; sourceTree = "<group>"; };
+		363F40C327AF1CA3006C79AB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		363F40C627AF28F9006C79AB /* UserInfoHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoHeaderViewController.swift; sourceTree = "<group>"; };
 		364E076F279522530085E799 /* GithubProfileWiki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubProfileWiki.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		364E0772279522530085E799 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		364E0774279522530085E799 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +111,23 @@
 			path = EmptyStateView;
 			sourceTree = "<group>";
 		};
+		363F40BC27AF173A006C79AB /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				363F40BD27AF174A006C79AB /* UserInfoViewController.swift */,
+				363F40C127AF1C80006C79AB /* UserInfoViewModel.swift */,
+			);
+			path = UserInfo;
+			sourceTree = "<group>";
+		};
+		363F40C527AF28E7006C79AB /* UserInfoHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				363F40C627AF28F9006C79AB /* UserInfoHeaderViewController.swift */,
+			);
+			path = UserInfoHeaderView;
+			sourceTree = "<group>";
+		};
 		364E0766279522530085E799 = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +171,7 @@
 		365931B9279C3EE900834D25 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				363F40BC27AF173A006C79AB /* UserInfo */,
 				365931C7279C412600834D25 /* FollowersList */,
 				365931C6279C411D00834D25 /* Favorites */,
 				365931C5279C411600834D25 /* Search */,
@@ -189,6 +217,7 @@
 		365931C0279C40CB00834D25 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				363F40C527AF28E7006C79AB /* UserInfoHeaderView */,
 				363F40B927AEE9B0006C79AB /* EmptyStateView */,
 				3609175C279F623E0031FF14 /* BaseImageView */,
 				365931C4279C40F500834D25 /* AlertPopupView */,
@@ -276,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				368CD92D279D9347003FABA6 /* FollowersAPI.swift */,
+				363F40BF27AF1C2F006C79AB /* UserAPI.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -284,6 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				368CD930279D95F5003FABA6 /* Followers.swift */,
+				363F40C327AF1CA3006C79AB /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -376,6 +407,8 @@
 				36AD887D279C25E900B0B5D3 /* UIViewController+Extension.swift in Sources */,
 				364E078B27989BB60085E799 /* BaseUITextField.swift in Sources */,
 				364E078E279927BB0085E799 /* UIImage+Extension.swift in Sources */,
+				363F40C027AF1C2F006C79AB /* UserAPI.swift in Sources */,
+				363F40C427AF1CA3006C79AB /* User.swift in Sources */,
 				365931C9279C442700834D25 /* UIView+Constraints.swift in Sources */,
 				368CD933279D9937003FABA6 /* FollowersListViewModel.swift in Sources */,
 				368CD92A279D9206003FABA6 /* APIPath.swift in Sources */,
@@ -385,9 +418,12 @@
 				3609175E279F62550031FF14 /* BaseImageView.swift in Sources */,
 				364E0787279527600085E799 /* SearchViewController.swift in Sources */,
 				36F286BB2799302A006F389D /* FollowersListViewController.swift in Sources */,
+				363F40BE27AF174A006C79AB /* UserInfoViewController.swift in Sources */,
 				368CD920279D8C0C003FABA6 /* RequestHandler+Extension.swift in Sources */,
+				363F40C727AF28F9006C79AB /* UserInfoHeaderViewController.swift in Sources */,
 				368CD926279D8E47003FABA6 /* APIService.swift in Sources */,
 				365931BE279C409F00834D25 /* Constants.swift in Sources */,
+				363F40C227AF1C80006C79AB /* UserInfoViewModel.swift in Sources */,
 				364E0789279527950085E799 /* FavoritesViewController.swift in Sources */,
 				36AD8879279C183200B0B5D3 /* BaseBodyLabel.swift in Sources */,
 				36AD887B279C198D00B0B5D3 /* AlertPopupViewController.swift in Sources */,
