@@ -62,6 +62,11 @@ class UserInfoHeaderViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+        configureConstraints()
+    }
+    
+    private func setupUI() {
         
         view.addSubview(containerStackView)
         view.addSubview(bioLabel)
@@ -73,11 +78,6 @@ class UserInfoHeaderViewController: UIViewController {
         locationContainer.addSubview(locationImageView)
         locationContainer.addSubview(locationLabel)
         
-        setupUI()
-        configureConstraints()
-    }
-    
-    private func setupUI() {
         if let user = user {
             userNameLabel.text = user.login
             nameLabel.text = user.name
