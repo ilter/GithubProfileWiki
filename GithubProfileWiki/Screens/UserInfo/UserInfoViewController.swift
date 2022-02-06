@@ -47,7 +47,7 @@ class UserInfoViewController: UIViewController {
         headerView.configureConstraint(top: (view.safeAreaLayoutGuide.topAnchor, .zero),
                                        leading: (view.leadingAnchor, Constants.Styling.defaultSpacing),
                                        trailing: (view.trailingAnchor, -Constants.Styling.defaultSpacing))
-        headerView.configureHeight(height: 120)
+        headerView.configureHeight(height: 200)
     }
     
     private func addChildViewController(child: UIViewController, to containerView: UIView) {

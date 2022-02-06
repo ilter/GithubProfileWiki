@@ -10,7 +10,7 @@ import UIKit
 class UserInfoHeaderViewController: UIViewController {
     
     private lazy var containerStackView: UIStackView = {
-       let stackView = UIStackView()
+        let stackView = UIStackView()
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.spacing = Constants.Styling.defaultSpacing
@@ -22,14 +22,32 @@ class UserInfoHeaderViewController: UIViewController {
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.spacing = 4
+        stackView.spacing = Constants.Styling.defaultSpacing
         return stackView
     }()
     
     private let avatarImageView: BaseImageView = BaseImageView(frame: .zero)
-    private let userNameLabel: BaseTitleLabel = BaseTitleLabel(textAlignment: .left, fontSize: 24, fontWeight: .bold)
-    private let nameLabel: BaseTitleLabel = BaseTitleLabel(textAlignment: .left, fontSize: 18, fontWeight: .regular)
+    
+    private let userNameLabel: BaseTitleLabel = BaseTitleLabel(textAlignment: .left,
+                                                               fontSize: 24,
+                                                               fontWeight: .bold)
+    
+    private let nameLabel: BaseTitleLabel = BaseTitleLabel(textAlignment: .left,
+                                                           fontSize: 18,
+                                                           fontWeight: .regular)
+    
     private let bioLabel: BaseBodyLabel = BaseBodyLabel(textAlignment: .left)
+    
+    private lazy var locationContainer: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let locationImageView: BaseImageView = BaseImageView(frame: .zero)
+    private let locationLabel: BaseTitleLabel = BaseTitleLabel(textAlignment: .left,
+                                                               fontSize: 18,
+                                                               fontWeight: .regular)
     
     private var user: User?
     
@@ -46,23 +64,17 @@ class UserInfoHeaderViewController: UIViewController {
         super.viewDidLoad()
         
         view.addSubview(containerStackView)
+        view.addSubview(bioLabel)
         
-        containerStackView.configureConstraint(top: (view.topAnchor, Constants.Styling.defaultSpacing),
-                                               bottom: (view.bottomAnchor, .zero),
-                                               leading: (view.leadingAnchor, .zero),
-                                               trailing: (view.trailingAnchor, .zero))
-        
-        
-        [userNameLabel, nameLabel, bioLabel].forEach {
+        [userNameLabel, nameLabel, locationContainer].forEach {
             userIdentityStackView.addArrangedSubview($0)
         }
-        
         [avatarImageView, userIdentityStackView].forEach { containerStackView.addArrangedSubview($0)}
+        locationContainer.addSubview(locationImageView)
+        locationContainer.addSubview(locationLabel)
         
-        avatarImageView.configureWidth(width: 100)
-        avatarImageView.configureHeight(height: 100)
         setupUI()
-        
+        configureConstraints()
     }
     
     private func setupUI() {
@@ -70,10 +82,27 @@ class UserInfoHeaderViewController: UIViewController {
             userNameLabel.text = user.login
             nameLabel.text = user.name
             bioLabel.text = user.bio
+            locationLabel.text = user.location
             avatarImageView.setImage(from: user.avatarUrl)
+            locationImageView.image = UIImage(systemName: Constants.SFSymbols.location)
         }
-        
-        bioLabel.numberOfLines = 0
+        bioLabel.numberOfLines = 2
     }
-
+    
+    private func configureConstraints() {
+        containerStackView.configureConstraint(top: (view.topAnchor, Constants.Styling.defaultSpacing),
+                                               leading: (view.leadingAnchor, .zero),
+                                               trailing: (view.trailingAnchor, .zero))
+        
+        bioLabel.configureConstraint(top: (containerStackView.bottomAnchor, .zero),
+                                     bottom: (view.bottomAnchor, .zero),
+                                     leading: (view.leadingAnchor, .zero),
+                                     trailing: (view.trailingAnchor, .zero))
+        
+        avatarImageView.configureWidth(width: Constants.Styling.profilePhotoWidthHeight)
+        avatarImageView.configureHeight(height: Constants.Styling.profilePhotoWidthHeight)
+        
+        locationLabel.configureConstraint(leading: (locationImageView.trailingAnchor, Constants.Styling.minimumSpacing))
+    }
+    
 }
