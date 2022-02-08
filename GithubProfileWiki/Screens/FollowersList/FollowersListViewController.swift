@@ -87,7 +87,13 @@ extension FollowersListViewController {
         view.addSubview(collectionView)
         collectionView.delegate = self
         collectionView.backgroundColor = .systemBackground
-        collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.reuseIdentifier)
+        collectionView.register(FollowerCell.self,
+                                forCellWithReuseIdentifier: FollowerCell.reuseIdentifier)
+        
+        collectionView.configureConstraint(top: (view.topAnchor, .zero),
+                                           bottom: (view.bottomAnchor, .zero),
+                                           leading: (view.safeAreaLayoutGuide.leadingAnchor, .zero),
+                                           trailing: (view.safeAreaLayoutGuide.trailingAnchor, .zero))
     }
     
     func configureSearchController() {

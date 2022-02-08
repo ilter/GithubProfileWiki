@@ -17,6 +17,7 @@
 		363F40C427AF1CA3006C79AB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363F40C327AF1CA3006C79AB /* User.swift */; };
 		363F40C727AF28F9006C79AB /* UserInfoHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363F40C627AF28F9006C79AB /* UserInfoHeaderViewController.swift */; };
 		363F40CC27AFDF1D006C79AB /* GithubItemInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363F40CB27AFDF1D006C79AB /* GithubItemInfoView.swift */; };
+		363F40CF27AFE451006C79AB /* GithubInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363F40CE27AFE450006C79AB /* GithubInfoViewController.swift */; };
 		364E0773279522530085E799 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E0772279522530085E799 /* AppDelegate.swift */; };
 		364E0775279522530085E799 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E0774279522530085E799 /* SceneDelegate.swift */; };
 		364E077C279522540085E799 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 364E077B279522540085E799 /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 		363F40C327AF1CA3006C79AB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		363F40C627AF28F9006C79AB /* UserInfoHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoHeaderViewController.swift; sourceTree = "<group>"; };
 		363F40CB27AFDF1D006C79AB /* GithubItemInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubItemInfoView.swift; sourceTree = "<group>"; };
+		363F40CE27AFE450006C79AB /* GithubInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubInfoViewController.swift; sourceTree = "<group>"; };
 		364E076F279522530085E799 /* GithubProfileWiki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubProfileWiki.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		364E0772279522530085E799 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		364E0774279522530085E799 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +138,14 @@
 				363F40CB27AFDF1D006C79AB /* GithubItemInfoView.swift */,
 			);
 			path = GithubItemInfoView;
+			sourceTree = "<group>";
+		};
+		363F40CD27AFE430006C79AB /* GitHubInfoView */ = {
+			isa = PBXGroup;
+			children = (
+				363F40CE27AFE450006C79AB /* GithubInfoViewController.swift */,
+			);
+			path = GitHubInfoView;
 			sourceTree = "<group>";
 		};
 		364E0766279522530085E799 = {
@@ -227,6 +237,7 @@
 		365931C0279C40CB00834D25 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				363F40CD27AFE430006C79AB /* GitHubInfoView */,
 				363F40CA27AFDF04006C79AB /* GithubItemInfoView */,
 				363F40C527AF28E7006C79AB /* UserInfoHeaderView */,
 				363F40B927AEE9B0006C79AB /* EmptyStateView */,
@@ -444,6 +455,7 @@
 				368CD91E279D8B45003FABA6 /* APIHandler.swift in Sources */,
 				364E0775279522530085E799 /* SceneDelegate.swift in Sources */,
 				368CD924279D8D7D003FABA6 /* ResponseHandler+Extension.swift in Sources */,
+				363F40CF27AFE451006C79AB /* GithubInfoViewController.swift in Sources */,
 				368CD922279D8CA7003FABA6 /* NetworkConstants.swift in Sources */,
 				368CD928279D904C003FABA6 /* APIEnvironment.swift in Sources */,
 				5FA7CF5E94C4D36BF5C3DBFD /* BaseUIButton.swift in Sources */,
