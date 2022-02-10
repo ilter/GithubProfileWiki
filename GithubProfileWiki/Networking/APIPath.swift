@@ -14,6 +14,10 @@ struct URLPath {
     var followersUrl: String {
         return "\(Environment().baseUrl)/users/\(userName)/followers"
     }
+    
+    var userUrl: String {
+        return "\(Environment().baseUrl)/users/\(userName)"
+    }
 }
 
     

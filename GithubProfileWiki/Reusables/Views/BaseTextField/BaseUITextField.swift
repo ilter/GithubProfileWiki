@@ -34,7 +34,7 @@ class BaseUITextField: UITextField {
         
         autocorrectionType = .no
         
-        placeholder = Constants.InfoTexts.textFieldPlacehorder
+        placeholder = Constants.InfoTexts.textFieldPlaceholder
         
         returnKeyType = .done
     }

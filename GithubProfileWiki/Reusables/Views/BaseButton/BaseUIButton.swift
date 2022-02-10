@@ -27,4 +27,10 @@ class BaseUIButton: UIButton {
         titleLabel?.font = Constants.Font.headlineFont
         translatesAutoresizingMaskIntoConstraints = false
     }
+    
+    func configureButton(backgroundColor: UIColor, title: String) {
+        self.backgroundColor = backgroundColor
+        self.setTitle(title, for: .normal)
+        configure()
+    }
 }
