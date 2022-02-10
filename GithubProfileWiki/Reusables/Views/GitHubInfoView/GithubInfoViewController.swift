@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class GithubInfoViewController: UIViewController {
+class GithubInfoViewController: UIViewController {
     private let containerStackView: UIStackView = {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -16,9 +16,20 @@ final class GithubInfoViewController: UIViewController {
         return view
     }()
     
-    private let firstItemInfoView = GithubItemInfoView()
-    private let secondItemInfoView = GithubItemInfoView()
-    private let actionButton = BaseUIButton()
+    let firstItemInfoView = GithubItemInfoView()
+    let secondItemInfoView = GithubItemInfoView()
+    let actionButton = BaseUIButton()
+    
+    var user: User?
+    
+    init(user: User) {
+        super.init(nibName: nil, bundle: nil)
+        self.user = user
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -1,5 +1,5 @@
 //
-//  UserInfoViewModel.swift
+//  ProfileViewModel.swift
 //  GithubProfileWiki
 //
 //  Created by ilter on 5.02.2022.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class UserInfoViewModel {
+class ProfileViewModel {
     func fetchUserInfo(userName: String, param: [String: Any], completion: @escaping (User?, Error?) -> ()) {
         let request = UserAPI(userName: userName)
         

@@ -64,7 +64,7 @@ final class FollowersListViewController: UIViewController {
                 strongSelf.presentAlertPopupOnMainThread(title: "Error", message: error?.localizedDescription ?? "Hata", buttonTitle: "Close")
             } else {
                 if let viewModel = model {
-                    if viewModel.count == .zero {
+                    if viewModel.count == .zero && strongSelf.followers.count == .zero {
                         RequestConstantValues.hasMoreFollower = false
                         RequestConstantValues.pageNum = .zero
                         strongSelf.showEmptyStateView(with: "This User does not have any followers.😞", in: strongSelf.view)
@@ -156,7 +156,7 @@ extension FollowersListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let activeArray: [Follower] = isSearching ? filteredFollowers : followers
         let follower: Follower = activeArray[indexPath.row]
-        let destVC = UserInfoViewController(user: follower)
+        let destVC = ProfileViewController(user: follower)
         let navController = UINavigationController(rootViewController: destVC)
         present(navController, animated: true)
     }

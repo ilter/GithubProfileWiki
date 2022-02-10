@@ -12,15 +12,12 @@ class SearchViewController: UIViewController {
     
     private enum ConstraintConstants {
         static let defaultSpacing: CGFloat = 50.0
-        static let logoImageHeightandWidth: CGFloat = 200.0
         static let anormousSpacing: CGFloat = 80.0
     }
     
     private enum LabelConstants {
-        static let buttonTitle: String = "Get Followers"
         static let popupTitle: String = "Enter Username"
         static let popUpMessage: String = "Please enter a username. We need to know who you are looking for."
-        static let popUpButtonLabel: String = "Close"
     }
     
     private lazy var logoImageView: UIImageView = {
@@ -30,7 +27,7 @@ class SearchViewController: UIViewController {
     }()
     
     let userNameTextField = BaseUITextField()
-    let searchButton = BaseUIButton(backgroundColor: .systemGreen, title: LabelConstants.buttonTitle)
+    let searchButton = BaseUIButton(backgroundColor: .systemGreen, title: Constants.InfoTexts.followerButtonTitle)
     
     var isUserNameEntered: Bool {
         guard let userName = userNameTextField.text else { return false }
@@ -65,8 +62,8 @@ extension SearchViewController {
         
         logoImageView.configureConstraint(top: (view.safeAreaLayoutGuide.topAnchor, ConstraintConstants.anormousSpacing),
                                           centerX: (view.centerXAnchor, .zero))
-        logoImageView.configureHeight(height: ConstraintConstants.logoImageHeightandWidth)
-        logoImageView.configureWidth(width: ConstraintConstants.logoImageHeightandWidth)
+        logoImageView.configureHeight(height: Constants.Styling.mainLogoHeight)
+        logoImageView.configureWidth(width: Constants.Styling.mainLogoHeight)
     }
     
     private func configureTextField() {
@@ -98,7 +95,7 @@ extension SearchViewController {
         guard isUserNameEntered else {
             presentAlertPopupOnMainThread(title: LabelConstants.popupTitle,
                                           message: LabelConstants.popUpMessage,
-                                          buttonTitle: LabelConstants.popUpButtonLabel)
+                                          buttonTitle: Constants.InfoTexts.closeButtonText)
             return
         }
         let followersListViewController = FollowersListViewController()

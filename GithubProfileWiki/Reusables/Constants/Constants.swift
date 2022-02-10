@@ -20,7 +20,9 @@ struct Constants {
         static let defaultSpacing: CGFloat = 12.0
         
         static let profilePhotoWidthHeight: CGFloat = 100.0
-        
+        static let gitHubInfoViewHeight: CGFloat = 120.0
+        static let profileHeaderContainerHeight: CGFloat = 200.0
+        static let mainLogoHeight: CGFloat = 200.0
     }
 
     struct Font {
@@ -33,6 +35,12 @@ struct Constants {
 
     struct InfoTexts {
         static let textFieldPlacehorder: String = "Enter a username."
+        static let closeButtonText: String = "Close"
+        
+        static let createdAt = "Created at"
+        static let errorTitle = "Error"
+        static let errorMessage = "An Error occured."
+        static let followerButtonTitle: String = "Get Followers"
     }
     
     enum SFSymbols {

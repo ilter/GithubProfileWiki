@@ -1,5 +1,5 @@
 //
-//  UserInfoHeaderViewController.swift
+//  ProfileHeaderViewController.swift
 //  GithubProfileWiki
 //
 //  Created by ilter on 6.02.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UserInfoHeaderViewController: UIViewController {
+class ProfileHeaderViewController: UIViewController {
     
     private lazy var containerStackView: UIStackView = {
         let stackView = UIStackView()

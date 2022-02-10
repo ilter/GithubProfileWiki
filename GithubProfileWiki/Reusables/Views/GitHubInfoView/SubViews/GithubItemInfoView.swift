@@ -21,11 +21,12 @@ class GithubItemInfoView: UIView {
         return imageView
     }()
     
-    private let titleLabel: BaseTitleLabel = BaseTitleLabel(textAlignment: .left, fontSize: 14, fontWeight: .regular)
-    private let countLabel: BaseTitleLabel = BaseTitleLabel(textAlignment: .center, fontSize: 14, fontWeight: .regular)
+    private let titleLabel: BaseTitleLabel = BaseTitleLabel(textAlignment: .left, fontSize: 14, fontWeight: .semibold)
+    private let countLabel: BaseTitleLabel = BaseTitleLabel(textAlignment: .center, fontSize: 14, fontWeight: .semibold)
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        setupUI()
     }
     
     required init?(coder: NSCoder) {
@@ -39,10 +40,10 @@ class GithubItemInfoView: UIView {
                                             leading: (leadingAnchor, .zero))
         
         titleLabel.configureConstraint(leading: (symbolImageView.trailingAnchor, Constants.Styling.defaultSpacing),
-                                       trailing: (trailingAnchor, .zero),
+                                       trailing: (trailingAnchor, -Constants.Styling.defaultSpacing),
                                        centerY: (symbolImageView.centerYAnchor, .zero))
         
-        countLabel.configureConstraint(top: (symbolImageView.bottomAnchor, Constants.Styling.minScaleFactor),
+        countLabel.configureConstraint(top: (symbolImageView.bottomAnchor, Constants.Styling.minimumSpacing),
                                        bottom: (bottomAnchor, .zero),
                                        centerX: (centerXAnchor, .zero))
     }
