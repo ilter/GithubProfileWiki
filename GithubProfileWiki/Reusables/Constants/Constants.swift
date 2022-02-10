@@ -36,6 +36,7 @@ struct Constants {
     struct InfoTexts {
         static let textFieldPlaceholder: String = "Enter username."
         static let closeButtonText: String = "Close"
+        static let success: String = "Success!"
         
         static let createdAt = "Created at"
         static let followerButtonTitle: String = "Get Followers"
@@ -45,6 +46,8 @@ struct Constants {
         static let gists: String = "Public Gists"
         static let followers: String = "Followers"
         static let following: String = "Following"
+        
+        static let favorited: String = "You have successfully favorited this user."
     }
     
     struct WarningTexts {
