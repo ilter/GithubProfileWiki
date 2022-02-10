@@ -7,6 +7,12 @@
 
 import UIKit
 
+
+protocol ProfileViewControllerDelegate: AnyObject {
+    func didTappedGitHubProfile(for user: User)
+    func didTappedGetFollowers()
+}
+
 class ProfileViewController: UIViewController {
     
     let headerView: UIView = {
@@ -71,13 +77,13 @@ class ProfileViewController: UIViewController {
                                        trailing: (view.trailingAnchor, -Constants.Styling.defaultSpacing))
         
         followersView.configureConstraint(top: (headerView.bottomAnchor, Constants.Styling.maxSpacing),
-                                       leading: (view.leadingAnchor, Constants.Styling.defaultSpacing),
-                                       trailing: (view.trailingAnchor, -Constants.Styling.defaultSpacing))
+                                          leading: (view.leadingAnchor, Constants.Styling.defaultSpacing),
+                                          trailing: (view.trailingAnchor, -Constants.Styling.defaultSpacing))
         
         
         reposView.configureConstraint(top: (followersView.bottomAnchor, Constants.Styling.maxSpacing),
-                                       leading: (view.leadingAnchor, Constants.Styling.defaultSpacing),
-                                       trailing: (view.trailingAnchor, -Constants.Styling.defaultSpacing))
+                                      leading: (view.leadingAnchor, Constants.Styling.defaultSpacing),
+                                      trailing: (view.trailingAnchor, -Constants.Styling.defaultSpacing))
         
         howOldLabel.configureConstraint(top: (reposView.bottomAnchor, Constants.Styling.defaultSpacing),
                                         bottom: (view.safeAreaLayoutGuide.bottomAnchor, -Constants.Styling.maxSpacing),
@@ -112,13 +118,35 @@ class ProfileViewController: UIViewController {
             } else {
                 if let userModel = response {
                     DispatchQueue.main.async {
-                        strongSelf.addChildViewController(child: ProfileHeaderViewController(user: userModel), to: strongSelf.headerView)
-                        strongSelf.addChildViewController(child: RepoInfoViewController(user: userModel), to: strongSelf.reposView)
-                        strongSelf.addChildViewController(child: FollowerInfoViewController(user: userModel), to: strongSelf.followersView)
-                        strongSelf.setHowOldText(createdAt: userModel.createdAt.convertDateToDisplayFormat())
+                        strongSelf.configureUIElements(with: userModel)
                     }
                 }
             }
         }
+    }
+    
+    private func configureUIElements(with user: User) {
+        let repoViewController = RepoInfoViewController(user: user)
+        repoViewController.delegate = self
+        let followerInfoViewController = FollowerInfoViewController(user: user)
+        followerInfoViewController.delegate = self
+        
+        addChildViewController(child: ProfileHeaderViewController(user: user), to: headerView)
+        addChildViewController(child: repoViewController, to: reposView)
+        addChildViewController(child: followerInfoViewController, to: followersView)
+        setHowOldText(createdAt: user.createdAt.convertDateToDisplayFormat())
+    }
+}
+
+// MARK: - Delegate
+
+extension ProfileViewController: ProfileViewControllerDelegate {
+    func didTappedGitHubProfile(for user: User) {
+        guard let url = URL(string: user.htmlUrl) else { return }
+        presentSafariVC(with: url)
+    }
+    
+    func didTappedGetFollowers() {
+        //
     }
 }

@@ -21,6 +21,7 @@ class GithubInfoViewController: UIViewController {
     let actionButton = BaseUIButton()
     
     var user: User?
+    weak var delegate: ProfileViewControllerDelegate?
     
     init(user: User) {
         super.init(nibName: nil, bundle: nil)
@@ -36,6 +37,7 @@ class GithubInfoViewController: UIViewController {
         configureBackgroundView()
         setupUI()
         configureConstraints()
+        configureActionButton()
     }
     
 }
@@ -63,5 +65,12 @@ extension GithubInfoViewController {
                                          bottom: (view.bottomAnchor, -Constants.Styling.defaultSpacing),
                                          leading: (view.leadingAnchor, Constants.Styling.defaultSpacing),
                                          trailing: (view.trailingAnchor, -Constants.Styling.defaultSpacing))
+    }
+    
+    private func configureActionButton() {
+        actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func actionButtonTapped() {
     }
 }

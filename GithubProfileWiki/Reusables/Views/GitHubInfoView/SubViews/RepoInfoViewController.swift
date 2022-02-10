@@ -19,4 +19,9 @@ final class RepoInfoViewController: GithubInfoViewController {
         secondItemInfoView.set(itemInfoType: .gists, withCount: user?.publicGists ?? .zero)
         actionButton.configureButton(backgroundColor: .systemPurple, title: Constants.InfoTexts.githubProfileText)
     }
+    
+    override func actionButtonTapped() {
+        guard let user = user else { return }
+        delegate?.didTappedGitHubProfile(for: user)
+    }
 }
