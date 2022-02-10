@@ -38,8 +38,6 @@ struct Constants {
         static let closeButtonText: String = "Close"
         
         static let createdAt = "Created at"
-        static let errorTitle = "Error"
-        static let errorMessage = "An Error occured."
         static let followerButtonTitle: String = "Get Followers"
         static let githubProfileText: String = "GitHub Profile"
         

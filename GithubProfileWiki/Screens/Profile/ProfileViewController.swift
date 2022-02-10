@@ -10,7 +10,7 @@ import UIKit
 
 protocol ProfileViewControllerDelegate: AnyObject {
     func didTappedGitHubProfile(for user: User)
-    func didTappedGetFollowers()
+    func didTappedGetFollowers(for user: User)
 }
 
 class ProfileViewController: UIViewController {
@@ -40,6 +40,7 @@ class ProfileViewController: UIViewController {
     private var profileViewModel = ProfileViewModel()
     private var user: User?
     private let howOldLabel: BaseBodyLabel = BaseBodyLabel(textAlignment: .center)
+    weak var delegate: FollowersListVCDelegate?
     
     init(user: Follower) {
         super.init(nibName: nil, bundle: nil)
@@ -112,8 +113,8 @@ class ProfileViewController: UIViewController {
         profileViewModel.fetchUserInfo(userName: user, param: [:]) { [weak self] (response, error) in
             guard let strongSelf = self else { return }
             if error != nil {
-                strongSelf.presentAlertPopupOnMainThread(title: Constants.InfoTexts.errorTitle,
-                                                         message: error?.localizedDescription ?? Constants.InfoTexts.errorMessage,
+                strongSelf.presentAlertPopupOnMainThread(title: Constants.WarningTexts.errorTitle,
+                                                         message: error?.localizedDescription ?? Constants.WarningTexts.errorMessage,
                                                          buttonTitle: Constants.InfoTexts.closeButtonText)
             } else {
                 if let userModel = response {
@@ -146,7 +147,12 @@ extension ProfileViewController: ProfileViewControllerDelegate {
         presentSafariVC(with: url)
     }
     
-    func didTappedGetFollowers() {
-        //
+    func didTappedGetFollowers(for user: User) {
+        guard user.followers != .zero else {
+            presentAlertPopupOnMainThread(title: Constants.WarningTexts.errorTitle, message: Constants.WarningTexts.errorMessage, buttonTitle: Constants.InfoTexts.closeButtonText)
+            return
+        }
+        delegate?.didRequestFollowers(for: user.login)
+        dismissViewController()
     }
 }

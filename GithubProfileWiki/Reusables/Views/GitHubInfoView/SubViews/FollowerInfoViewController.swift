@@ -19,4 +19,9 @@ final class FollowerInfoViewController: GithubInfoViewController {
         secondItemInfoView.set(itemInfoType: .following, withCount: user?.following ?? .zero)
         actionButton.configureButton(backgroundColor: .systemGreen, title: Constants.InfoTexts.followerButtonTitle)
     }
+    
+    override func actionButtonTapped() {
+        guard let user = user else { return }
+        delegate?.didTappedGetFollowers(for: user)
+    }
 }
