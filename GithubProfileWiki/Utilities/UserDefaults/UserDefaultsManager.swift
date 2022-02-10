@@ -29,7 +29,7 @@ final class UserDefaultsManager {
         return decode
     }
     
-    func removeFavorites() {
-        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.favorites.rawValue)
+    func removeFavorites(key: UserDefaultsKeys) {
+        UserDefaults.standard.removeObject(forKey: key.rawValue)
     }
 }
