@@ -87,14 +87,14 @@ extension SearchViewController {
     }
     
     @objc private func pushFollowersListVC() {
-        guard isUserNameEntered else {
+        guard isUserNameEntered,
+              let username = userNameTextField.text else {
             presentAlertPopupOnMainThread(title: Constants.InfoTexts.textFieldPlaceholder,
                                           message: Constants.WarningTexts.searchPopUpMessage,
                                           buttonTitle: Constants.InfoTexts.closeButtonText)
             return
         }
-        let followersListViewController = FollowersListViewController()
-        followersListViewController.username = userNameTextField.text
+        let followersListViewController = FollowersListViewController(username: username)
         navigationController?.pushViewController(followersListViewController, animated: true)
     }
 }

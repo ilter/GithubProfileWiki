@@ -17,7 +17,7 @@ final class FollowersListViewController: UIViewController {
         case main
     }
     
-    var username: String?
+    var username: String!
     private var followerListViewModel = FollowersListViewModel()
     private var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
@@ -33,6 +33,14 @@ final class FollowersListViewController: UIViewController {
         case perPage = "per_page"
     }
     
+    init(username: String) {
+        super.init(nibName: nil, bundle: nil)
+        self.username = username
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
@@ -40,8 +48,37 @@ final class FollowersListViewController: UIViewController {
         configureCollectionView()
         configureDataSource()
         
-        guard let username = username else { return }
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add,
+                                         target: self,
+                                         action: #selector(addButtonTapped))
+        
+        navigationItem.rightBarButtonItem = addButton
+        
         getFollowers(username: username, page: RequestConstantValues.pageNum)
+    }
+    
+    @objc func addButtonTapped() {
+        showLoadingViewWithActivityIndicator()
+        followerListViewModel.fetchUserInfo(userName: username, param: [:]) {[weak self] (response, error) in
+            guard let strongSelf = self else { return }
+            strongSelf.dismissLoadingView()
+            if error != nil {
+                strongSelf.presentAlertPopupOnMainThread(title: Constants.WarningTexts.errorTitle,
+                                                         message: error?.localizedDescription ?? Constants.WarningTexts.errorMessage,
+                                                         buttonTitle: Constants.InfoTexts.closeButtonText)
+            } else {
+                if let userModel = response {
+                    DispatchQueue.main.async {
+                        let favoriteUser: Follower = Follower(login: userModel.login, avatarUrl: userModel.avatarUrl)
+                        strongSelf.addFavoriteUserToUserDefaults(with: favoriteUser)
+                        strongSelf.presentAlertPopupOnMainThread(title: Constants.InfoTexts.success,
+                                                                 message: Constants.InfoTexts.favorited,
+                                                                 buttonTitle: Constants.InfoTexts.closeButtonText)
+                    }
+                }
+            }
+        }
+   
     }
     
     
@@ -85,6 +122,13 @@ final class FollowersListViewController: UIViewController {
 // MARK: - Configure CollectionView
 
 extension FollowersListViewController {
+    
+    func addFavoriteUserToUserDefaults(with user: Follower) {
+        let userDefaultsManager = UserDefaultsManager()
+        var favorites: [Follower] = userDefaultsManager.getArrayFromLocal(key: .favorites)
+        favorites.append(user)
+        userDefaultsManager.setArrayToLocal(key: .favorites, array: favorites)
+    }
     
     func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createThreeColumnFlowLayout())
@@ -153,7 +197,7 @@ extension FollowersListViewController: UICollectionViewDelegate {
         if offsetY > contentHeight - height {
             guard RequestConstantValues.hasMoreFollower else { return }
             RequestConstantValues.pageNum += 1
-            getFollowers(username: username!, page: RequestConstantValues.pageNum)
+            getFollowers(username: username, page: RequestConstantValues.pageNum)
         }
     }
     
