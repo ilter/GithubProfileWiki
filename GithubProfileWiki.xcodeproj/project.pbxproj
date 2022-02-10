@@ -203,14 +203,14 @@
 		364E0771279522530085E799 /* GithubProfileWiki */ = {
 			isa = PBXGroup;
 			children = (
-				364D4AB827B5A9DF00E773B6 /* Utilities */,
 				368CD92F279D95EB003FABA6 /* Model */,
-				368CD92C279D9319003FABA6 /* Services */,
 				368CD91C279D8A3A003FABA6 /* Networking */,
+				365931BB279C3F2000834D25 /* ProjectFiles */,
 				36AD8875279C16BA00B0B5D3 /* Reusables */,
 				365931B9279C3EE900834D25 /* Screens */,
-				365931BB279C3F2000834D25 /* ProjectFiles */,
+				368CD92C279D9319003FABA6 /* Services */,
 				365931BA279C3F0F00834D25 /* StylingResources */,
+				364D4AB827B5A9DF00E773B6 /* Utilities */,
 			);
 			path = GithubProfileWiki;
 			sourceTree = "<group>";
