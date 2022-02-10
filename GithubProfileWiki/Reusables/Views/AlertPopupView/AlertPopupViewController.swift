@@ -98,6 +98,8 @@ extension AlertPopupViewController {
                                    bottom: (containerView.bottomAnchor, -Constants.Styling.maxSpacing),
                                    leading: (containerView.leadingAnchor, Constants.Styling.maxSpacing),
                                    trailing: (containerView.trailingAnchor, -Constants.Styling.maxSpacing))
+        
+        button.configureHeight(height: 42)
     }
     
     @objc private func dismissAlertPopup() {

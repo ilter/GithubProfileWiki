@@ -90,8 +90,6 @@ class ProfileViewController: UIViewController {
                                         bottom: (view.safeAreaLayoutGuide.bottomAnchor, -Constants.Styling.maxSpacing),
                                         leading: (view.leadingAnchor, Constants.Styling.defaultSpacing),
                                         trailing: (view.trailingAnchor, -Constants.Styling.defaultSpacing))
-        
-        
     }
     
     private func addChildViewController(child: UIViewController, to containerView: UIView) {
