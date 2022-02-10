@@ -52,16 +52,16 @@ class GithubItemInfoView: UIView {
         switch itemInfoType {
         case .repos:
             symbolImageView.image = UIImage(systemName: Constants.SFSymbols.repos)
-            titleLabel.text = "Public Repos"
+            titleLabel.text = Constants.InfoTexts.repos
         case .gists:
             symbolImageView.image = UIImage(systemName: Constants.SFSymbols.gists)
-            titleLabel.text = "Public Gists"
+            titleLabel.text = Constants.InfoTexts.gists
         case .followers:
             symbolImageView.image = UIImage(systemName: Constants.SFSymbols.followers)
-            titleLabel.text = "Followers"
+            titleLabel.text = Constants.InfoTexts.followers
         case .following:
             symbolImageView.image = UIImage(systemName: Constants.SFSymbols.following)
-            titleLabel.text = "Following"
+            titleLabel.text = Constants.InfoTexts.following
         }
         
         countLabel.text = String(count)

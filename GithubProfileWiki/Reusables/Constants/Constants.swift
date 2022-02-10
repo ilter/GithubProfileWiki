@@ -34,13 +34,25 @@ struct Constants {
     }
 
     struct InfoTexts {
-        static let textFieldPlacehorder: String = "Enter a username."
+        static let textFieldPlaceholder: String = "Enter username."
         static let closeButtonText: String = "Close"
         
         static let createdAt = "Created at"
         static let errorTitle = "Error"
         static let errorMessage = "An Error occured."
         static let followerButtonTitle: String = "Get Followers"
+        static let githubProfileText: String = "GitHub Profile"
+        
+        static let repos: String = "Public Repos"
+        static let gists: String = "Public Gists"
+        static let followers: String = "Followers"
+        static let following: String = "Following"
+    }
+    
+    struct WarningTexts {
+        static let errorTitle = "Error"
+        static let errorMessage = "An Error occured."
+        static let searchPopUpMessage: String = "Please enter a username. We need to know who you are looking for."
     }
     
     enum SFSymbols {

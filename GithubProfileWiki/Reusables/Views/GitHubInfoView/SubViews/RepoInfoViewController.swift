@@ -17,6 +17,6 @@ final class RepoInfoViewController: GithubInfoViewController {
     private func setupUI() {
         firstItemInfoView.set(itemInfoType: .repos, withCount: user?.publicRepos ?? .zero)
         secondItemInfoView.set(itemInfoType: .gists, withCount: user?.publicGists ?? .zero)
-        actionButton.configureButton(backgroundColor: .systemPurple, title: "GitHub Profile")
+        actionButton.configureButton(backgroundColor: .systemPurple, title: Constants.InfoTexts.githubProfileText)
     }
 }

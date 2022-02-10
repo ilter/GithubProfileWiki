@@ -15,11 +15,6 @@ class SearchViewController: UIViewController {
         static let anormousSpacing: CGFloat = 80.0
     }
     
-    private enum LabelConstants {
-        static let popupTitle: String = "Enter Username"
-        static let popUpMessage: String = "Please enter a username. We need to know who you are looking for."
-    }
-    
     private lazy var logoImageView: UIImageView = {
         let logoImageView = UIImageView()
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -93,8 +88,8 @@ extension SearchViewController {
     
     @objc private func pushFollowersListVC() {
         guard isUserNameEntered else {
-            presentAlertPopupOnMainThread(title: LabelConstants.popupTitle,
-                                          message: LabelConstants.popUpMessage,
+            presentAlertPopupOnMainThread(title: Constants.InfoTexts.textFieldPlaceholder,
+                                          message: Constants.WarningTexts.searchPopUpMessage,
                                           buttonTitle: Constants.InfoTexts.closeButtonText)
             return
         }

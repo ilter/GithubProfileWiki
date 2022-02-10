@@ -17,6 +17,6 @@ final class FollowerInfoViewController: GithubInfoViewController {
     private func setupUI() {
         firstItemInfoView.set(itemInfoType: .followers, withCount: user?.followers ?? .zero)
         secondItemInfoView.set(itemInfoType: .following, withCount: user?.following ?? .zero)
-        actionButton.configureButton(backgroundColor: .systemGreen, title: "Get Followers")
+        actionButton.configureButton(backgroundColor: .systemGreen, title: Constants.InfoTexts.followerButtonTitle)
     }
 }
