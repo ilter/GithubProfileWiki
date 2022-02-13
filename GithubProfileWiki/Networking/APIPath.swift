@@ -8,15 +8,15 @@
 import Foundation
 
 struct URLPath {
-    
+    var environment = Environment()
     var userName: String
     
     var followersUrl: String {
-        return "\(Environment().baseUrl)/users/\(userName)/followers"
+        return "\(environment.baseUrl)/users/\(userName)/followers"
     }
     
     var userUrl: String {
-        return "\(Environment().baseUrl)/users/\(userName)"
+        return "\(environment.baseUrl)/users/\(userName)"
     }
 }
 
