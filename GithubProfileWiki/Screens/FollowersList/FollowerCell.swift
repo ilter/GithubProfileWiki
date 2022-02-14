@@ -35,11 +35,11 @@ class FollowerCell: UICollectionViewCell {
                                           leading: (contentView.leadingAnchor, Constants.Styling.minimumSpacing),
                                           trailing: (contentView.trailingAnchor, -Constants.Styling.minimumSpacing))
         
-        NSLayoutConstraint.activate([
-            avatarImgView.heightAnchor.constraint(equalTo: avatarImgView.widthAnchor)
-        ])
+        avatarImgView.configureHeight(height: Constants.Styling.followerCellImg)
+        avatarImgView.configureWidth(width: Constants.Styling.followerCellImg)
         
         userNameLabel.configureConstraint(top: (avatarImgView.bottomAnchor, Constants.Styling.defaultSpacing),
+                                          bottom: (contentView.bottomAnchor, -Constants.Styling.defaultSpacing),
                                           leading: (contentView.leadingAnchor, Constants.Styling.minimumSpacing),
                                           trailing: (contentView.trailingAnchor, -Constants.Styling.minimumSpacing))
     }

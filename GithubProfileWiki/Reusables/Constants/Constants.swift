@@ -23,6 +23,9 @@ struct Constants {
         static let gitHubInfoViewHeight: CGFloat = 120.0
         static let profileHeaderContainerHeight: CGFloat = 200.0
         static let mainLogoHeight: CGFloat = 200.0
+        
+        static let followerCellImg: CGFloat = 100.0
+
     }
 
     struct Font {
