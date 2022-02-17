@@ -46,6 +46,7 @@
 		368CD92E279D9347003FABA6 /* FollowersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368CD92D279D9347003FABA6 /* FollowersAPI.swift */; };
 		368CD931279D95F5003FABA6 /* Followers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368CD930279D95F5003FABA6 /* Followers.swift */; };
 		368CD933279D9937003FABA6 /* FollowersListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368CD932279D9937003FABA6 /* FollowersListViewModel.swift */; };
+		36AA948327BEC24400254E77 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AA948227BEC24400254E77 /* ProfileView.swift */; };
 		36AD8877279C16D000B0B5D3 /* BaseTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AD8876279C16D000B0B5D3 /* BaseTitleLabel.swift */; };
 		36AD8879279C183200B0B5D3 /* BaseBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AD8878279C183200B0B5D3 /* BaseBodyLabel.swift */; };
 		36AD887B279C198D00B0B5D3 /* AlertPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AD887A279C198D00B0B5D3 /* AlertPopupViewController.swift */; };
@@ -95,6 +96,7 @@
 		368CD92D279D9347003FABA6 /* FollowersAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersAPI.swift; sourceTree = "<group>"; };
 		368CD930279D95F5003FABA6 /* Followers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Followers.swift; sourceTree = "<group>"; };
 		368CD932279D9937003FABA6 /* FollowersListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersListViewModel.swift; sourceTree = "<group>"; };
+		36AA948227BEC24400254E77 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		36AD8876279C16D000B0B5D3 /* BaseTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTitleLabel.swift; sourceTree = "<group>"; };
 		36AD8878279C183200B0B5D3 /* BaseBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBodyLabel.swift; sourceTree = "<group>"; };
 		36AD887A279C198D00B0B5D3 /* AlertPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPopupViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			children = (
 				363F40BD27AF174A006C79AB /* ProfileViewController.swift */,
 				363F40C127AF1C80006C79AB /* ProfileViewModel.swift */,
+				36AA948227BEC24400254E77 /* ProfileView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				368CD92A279D9206003FABA6 /* APIPath.swift in Sources */,
 				368CD92E279D9347003FABA6 /* FollowersAPI.swift in Sources */,
 				36AD8877279C16D000B0B5D3 /* BaseTitleLabel.swift in Sources */,
+				36AA948327BEC24400254E77 /* ProfileView.swift in Sources */,
 				364E0773279522530085E799 /* AppDelegate.swift in Sources */,
 				3609175E279F62550031FF14 /* BaseImageView.swift in Sources */,
 				364E0787279527600085E799 /* SearchViewController.swift in Sources */,
