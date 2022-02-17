@@ -97,7 +97,6 @@ extension ProfileViewController: ProfileViewModelOutput {
 // MARK: - Delegate
 
 extension ProfileViewController: ProfileViewControllerDelegate {
-    
     func didTappedGitHubProfile(for user: User) {
         viewModel.showGitHubProfile(for: user)
     }

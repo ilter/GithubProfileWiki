@@ -21,7 +21,6 @@ protocol ProfileViewModelOutput: AnyObject {
 }
 
 class ProfileViewModel {
-    
     weak var output: ProfileViewModelOutput?
     
     private func fetchUserInfo(userName: String, param: [String: Any], completion: @escaping (User?, Error?) -> ()) {
@@ -44,7 +43,6 @@ extension ProfileViewModel: ProfileViewModelInput {
     func showUserFollowers(for user: User) {
         output?.showUserFollowers(for: user)
     }
-    
     
     func showGitHubProfile(for user: User) {
         output?.showGitHubProfile(for: user)
