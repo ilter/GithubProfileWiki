@@ -18,6 +18,8 @@ struct Constants {
         static let maxSpacing: CGFloat = 20.0
         static let minimumSpacing: CGFloat = 8.0
         static let defaultSpacing: CGFloat = 12.0
+        static let searchPageDefaultSpacing: CGFloat = 50.0
+        static let anormousSpacing: CGFloat = 80.0
         
         static let profilePhotoWidthHeight: CGFloat = 100.0
         static let gitHubInfoViewHeight: CGFloat = 120.0
@@ -25,7 +27,6 @@ struct Constants {
         static let mainLogoHeight: CGFloat = 200.0
         
         static let followerCellImg: CGFloat = 100.0
-
     }
 
     struct Font {
