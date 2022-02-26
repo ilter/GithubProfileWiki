@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SearchView: UIView {
+final class SearchView: UIView {
     
     private lazy var logoImageView: UIImageView = {
         let logoImageView = UIImageView()

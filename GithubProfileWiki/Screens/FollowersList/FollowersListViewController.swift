@@ -64,7 +64,7 @@ final class FollowersListViewController: UIViewController {
 // MARK: - Configure CollectionView
 
 extension FollowersListViewController {
-    func configureCollectionView() {
+    private func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createThreeColumnFlowLayout())
         view.addSubview(collectionView)
         collectionView.delegate = self
@@ -78,14 +78,14 @@ extension FollowersListViewController {
                                            trailing: (view.safeAreaLayoutGuide.trailingAnchor, .zero))
     }
     
-    func configureViewController() {
+    private func configureViewController() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.setNavigationBarHidden(false, animated: true)
         title = username
     }
     
-    func configureSearchController() {
+    private func configureSearchController() {
         let searchController = UISearchController()
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
@@ -93,7 +93,7 @@ extension FollowersListViewController {
         navigationItem.searchController = searchController
     }
     
-    func createThreeColumnFlowLayout() -> UICollectionViewFlowLayout {
+    private func createThreeColumnFlowLayout() -> UICollectionViewFlowLayout {
         let width = view.bounds.width
         let minimumItemSpacesing: CGFloat = 10
         let availableWidth = width - (Constants.Styling.defaultSpacing * 2) - (minimumItemSpacesing * 2)
@@ -108,7 +108,7 @@ extension FollowersListViewController {
         return flowLayout
     }
     
-    func configureDataSource() {
+    private func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, Follower>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, follower ) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowerCell.reuseIdentifier, for: indexPath) as? FollowerCell
             cell?.set(follower: follower)

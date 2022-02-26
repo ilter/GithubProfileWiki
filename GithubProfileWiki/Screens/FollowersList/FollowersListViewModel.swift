@@ -5,6 +5,8 @@
 //  Created by ilter on 23.01.2022.
 //
 
+import Foundation
+
 protocol FollowersListViewModelInput: AnyObject {
     func loadFollowers(userName: String, page: Int)
     func addCurrentUserToFavorites(userName: String)
@@ -24,14 +26,12 @@ protocol FollowersListViewModelOutput: AnyObject {
     
 }
 
-import Foundation
-
-class FollowersListViewModel {
+final class FollowersListViewModel {
     var followers: [Follower] = []
     weak var output: FollowersListViewModelOutput?
     var filteredFollowers: [Follower] = []
     
-    func fetchFollowers(userName: String, param: [String: Any], completion: @escaping (Followers?, Error?) -> ()) {
+    private func fetchFollowers(userName: String, param: [String: Any], completion: @escaping (Followers?, Error?) -> ()) {
         let request = FollowersAPI(userName: userName)
         
         let apiService = APIService(apiRequest: request)
@@ -44,7 +44,7 @@ class FollowersListViewModel {
         }
     }
     
-    func fetchUserInfo(userName: String, param: [String: Any], completion: @escaping (User?, Error?) -> ()) {
+    private func fetchUserInfo(userName: String, param: [String: Any], completion: @escaping (User?, Error?) -> ()) {
         let request = UserAPI(userName: userName)
         
         let apiService = APIService(apiRequest: request)
@@ -57,8 +57,7 @@ class FollowersListViewModel {
         }
     }
     
-    
-    func addFavoriteUserToUserDefaults(with user: Follower) {
+    private func addFavoriteUserToUserDefaults(with user: Follower) {
         let userDefaultsManager = UserDefaultsManager()
         var favorites: [Follower] = userDefaultsManager.getArrayFromLocal(key: .favorites)
         favorites.append(user)

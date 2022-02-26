@@ -50,7 +50,7 @@ extension SearchViewController {
 }
 
 extension SearchViewController: UITextFieldDelegate {
-    private func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         pushFollowersListVC()
         return true
     }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavoritesViewController: UIViewController {
+final class FavoritesViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +38,7 @@ class FavoritesViewController: UIViewController {
 
 // MARK: - Configure UI Elements
 extension FavoritesViewController {
-    func configureTableView() {
+    private func configureTableView() {
         tableView.frame = view.bounds
         tableView.rowHeight = Constants.Styling.maxSpacing * 4
         tableView.delegate = self
@@ -47,7 +47,7 @@ extension FavoritesViewController {
         tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.reuseIdentifier)
     }
     
-    func getFavoriteUsers() {
+    private func getFavoriteUsers() {
         let favorites: [Follower] = UserDefaultsManager().getArrayFromLocal(key: .favorites)
         favoriteUsers = favorites
         tableView.reloadData()
