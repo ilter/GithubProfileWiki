@@ -12,30 +12,21 @@ protocol FollowersListVCDelegate: AnyObject {
 }
 
 final class FollowersListViewController: UIViewController {
-    
-    enum Section {
+    public enum Section {
         case main
     }
     
+    var collectionView: UICollectionView!
+    var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
+    
     var username: String!
-    private var followerListViewModel = FollowersListViewModel()
-    private var collectionView: UICollectionView!
-    private var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
-    private var followers: [Follower] = []
-    private var filteredFollowers: [Follower] = []
+    private var viewModel = FollowersListViewModel()
     private var isSearching: Bool = false
     
-    private enum RequestConstantValues: String {
-        static var pageNum: Int = 1
-        static var hasMoreFollower: Bool = true
-        static var followersPerPage: Int = 30
-        case page
-        case perPage = "per_page"
-    }
-    
     init(username: String) {
-        super.init(nibName: nil, bundle: nil)
         self.username = username
+        super.init(nibName: nil, bundle: nil)
+        
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -49,87 +40,30 @@ final class FollowersListViewController: UIViewController {
         configureDataSource()
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .add,
-                                         target: self,
-                                         action: #selector(addButtonTapped))
+                                        target: self,
+                                        action: #selector(addButtonTapped))
         
         navigationItem.rightBarButtonItem = addButton
         
-        getFollowers(username: username, page: RequestConstantValues.pageNum)
+        viewModel.output = self
+        
+        viewModel.loadFollowers(userName: username, page: viewModel.getPageNumber())
+        viewModel.resetPageNumber()
     }
     
     @objc func addButtonTapped() {
-        showLoadingViewWithActivityIndicator()
-        followerListViewModel.fetchUserInfo(userName: username, param: [:]) {[weak self] (response, error) in
-            guard let strongSelf = self else { return }
-            strongSelf.dismissLoadingView()
-            if error != nil {
-                strongSelf.presentAlertPopupOnMainThread(title: Constants.WarningTexts.errorTitle,
-                                                         message: error?.localizedDescription ?? Constants.WarningTexts.errorMessage,
-                                                         buttonTitle: Constants.InfoTexts.closeButtonText)
-            } else {
-                if let userModel = response {
-                    DispatchQueue.main.async {
-                        let favoriteUser: Follower = Follower(login: userModel.login, avatarUrl: userModel.avatarUrl)
-                        strongSelf.addFavoriteUserToUserDefaults(with: favoriteUser)
-                        strongSelf.presentAlertPopupOnMainThread(title: Constants.InfoTexts.success,
-                                                                 message: Constants.InfoTexts.favorited,
-                                                                 buttonTitle: Constants.InfoTexts.closeButtonText)
-                    }
-                }
-            }
-        }
-   
-    }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
-    
-    func configureViewController() {
-        view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        title = username
+        viewModel.addCurrentUserToFavorites(userName: username)
     }
 
-    func getFollowers(username: String, page: Int) {
-        let queryParams: [String: Any] = [RequestConstantValues.page.rawValue: page,
-                                    RequestConstantValues.perPage.rawValue: RequestConstantValues.followersPerPage]
-        showLoadingViewWithActivityIndicator()
-        followerListViewModel.fetchFollowers(userName: username, param: queryParams) { [weak self] (model, error) in
-            guard let strongSelf = self else { return }
-            strongSelf.dismissLoadingView()
-            if error != nil {
-                strongSelf.presentAlertPopupOnMainThread(title: "Error", message: error?.localizedDescription ?? "Hata", buttonTitle: "Close")
-            } else {
-                if let viewModel = model {
-                    if viewModel.count == .zero && strongSelf.followers.count == .zero {
-                        RequestConstantValues.hasMoreFollower = false
-                        RequestConstantValues.pageNum = .zero
-                        strongSelf.showEmptyStateView(with: "This User does not have any followers.😞", in: strongSelf.view)
-                        return
-                    }
-                    strongSelf.followers.append(contentsOf: viewModel)
-                    strongSelf.updateData(on: strongSelf.followers)
-                }
-            }
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
+    
 }
 
 // MARK: - Configure CollectionView
 
 extension FollowersListViewController {
-    
-    func addFavoriteUserToUserDefaults(with user: Follower) {
-        let userDefaultsManager = UserDefaultsManager()
-        var favorites: [Follower] = userDefaultsManager.getArrayFromLocal(key: .favorites)
-        favorites.append(user)
-        userDefaultsManager.setArrayToLocal(key: .favorites, array: favorites)
-    }
-    
     func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createThreeColumnFlowLayout())
         view.addSubview(collectionView)
@@ -142,6 +76,13 @@ extension FollowersListViewController {
                                            bottom: (view.bottomAnchor, .zero),
                                            leading: (view.safeAreaLayoutGuide.leadingAnchor, .zero),
                                            trailing: (view.safeAreaLayoutGuide.trailingAnchor, .zero))
+    }
+    
+    func configureViewController() {
+        view.backgroundColor = .systemBackground
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        title = username
     }
     
     func configureSearchController() {
@@ -157,7 +98,6 @@ extension FollowersListViewController {
         let minimumItemSpacesing: CGFloat = 10
         let availableWidth = width - (Constants.Styling.defaultSpacing * 2) - (minimumItemSpacesing * 2)
         let itemWidth = availableWidth / 3
-        
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.sectionInset = UIEdgeInsets(top: Constants.Styling.defaultSpacing,
                                                left: Constants.Styling.defaultSpacing,
@@ -175,15 +115,6 @@ extension FollowersListViewController {
             return cell
         })
     }
-    
-    func updateData(on followers: [Follower]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(followers)
-        DispatchQueue.main.async {
-            self.dataSource.apply(snapshot, animatingDifferences: true)
-        }
-    }
 }
 
 // MARK: - CollectionView Delegate
@@ -195,14 +126,15 @@ extension FollowersListViewController: UICollectionViewDelegate {
         let height = scrollView.frame.size.height
         
         if offsetY > contentHeight - height {
-            guard RequestConstantValues.hasMoreFollower else { return }
-            RequestConstantValues.pageNum += 1
-            getFollowers(username: username, page: RequestConstantValues.pageNum)
+            guard viewModel.userHasMoreFollower() else { return }
+            viewModel.increasePageNumber()
+            let pageNumber = viewModel.getPageNumber()
+            viewModel.loadFollowers(userName: username, page: pageNumber)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let activeArray: [Follower] = isSearching ? filteredFollowers : followers
+        let activeArray: [Follower] = isSearching ? viewModel.filteredFollowers : viewModel.followers
         let follower: Follower = activeArray[indexPath.row]
         let destVC = ProfileViewController(user: follower)
         destVC.delegate = self
@@ -215,18 +147,18 @@ extension FollowersListViewController: UICollectionViewDelegate {
 
 extension FollowersListViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
-        guard let filter = searchController.searchBar.text,
-              !filter.isEmpty else {
-            return
-        }
+        guard let keyword = searchController.searchBar.text,
+              !keyword.isEmpty else {
+                  return
+              }
         isSearching = true
-        filteredFollowers = followers.filter {$0.login.lowercased().contains(filter.lowercased())}
-        updateData(on: filteredFollowers)
+        viewModel.filteredFollowers = viewModel.followers.filter {$0.login.lowercased().contains(keyword.lowercased())}
+        viewModel.updateData(on: viewModel.filteredFollowers)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isSearching = false
-        updateData(on: followers)
+        viewModel.updateData(on: viewModel.followers)
     }
 }
 
@@ -236,10 +168,42 @@ extension FollowersListViewController: FollowersListVCDelegate {
     func didRequestFollowers(for username: String) {
         self.username = username
         title = username
-        RequestConstantValues.pageNum = 1
-        followers.removeAll()
-        filteredFollowers.removeAll()
+        viewModel.resetPageNumber()
+        viewModel.followers.removeAll()
+        viewModel.filteredFollowers.removeAll()
         collectionView.setContentOffset(.zero, animated: true)
-        getFollowers(username: username, page: RequestConstantValues.pageNum)
+        let pageNumber = viewModel.getPageNumber()
+        viewModel.loadFollowers(userName: username, page: pageNumber)
     }
+}
+
+extension FollowersListViewController: FollowersListViewModelOutput {
+    func displayAlertPopup(title: String, message: String, buttonTitle: String) {
+        presentAlertPopupOnMainThread(title: title, message: message, buttonTitle: buttonTitle)
+    }
+    
+    func displayLoading() {
+        showLoadingViewWithActivityIndicator()
+    }
+    
+    func dismissLoading() {
+        dismissLoadingView()
+    }
+    
+    func updateData(on followers: [Follower]?) {
+        guard let followers = followers else {
+            return
+        }
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(followers)
+        DispatchQueue.main.async {
+            self.dataSource.apply(snapshot, animatingDifferences: true)
+        }
+    }
+    
+    func showFollowersEmpty() {
+        showEmptyStateView(with: "This User does not have any followers.😞", in: self.view)
+    }
+    
 }

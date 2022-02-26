@@ -8,6 +8,15 @@
 import Foundation
 
 struct FollowersAPI: APIHandler {
+    
+    public enum FollowersRequestConstantValues: String {
+        static var pageNum: Int = 1
+        static var hasMoreFollower: Bool = true
+        static var followersPerPage: Int = 30
+        case page
+        case perPage = "per_page"
+    }
+    
     var userName: String
     
     func submitRequest(from param: [String: Any]) -> URLRequest? {
