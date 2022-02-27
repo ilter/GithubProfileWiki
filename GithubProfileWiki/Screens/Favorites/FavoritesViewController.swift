@@ -14,7 +14,7 @@ final class FavoritesViewController: UIViewController {
         return tableView
     }()
     
-    private var favoriteUsers: [Follower] = []
+    private let viewModel = FavoritesViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,8 @@ final class FavoritesViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getFavoriteUsers()
+        viewModel.loadFavorites()
+        tableView.reloadData()
     }
     
     private func setupUI() {
@@ -46,37 +47,31 @@ extension FavoritesViewController {
         
         tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.reuseIdentifier)
     }
-    
-    private func getFavoriteUsers() {
-        let favorites: [Follower] = UserDefaultsManager().getArrayFromLocal(key: .favorites)
-        favoriteUsers = favorites
-        tableView.reloadData()
-    }
 }
 
 // MARK: - UITableView Delegates
 extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favoriteUsers.count
+        return viewModel.favoriteUsers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteCell.reuseIdentifier) as! FavoriteCell
-        let favorite = favoriteUsers[indexPath.row]
+        let favorite = viewModel.favoriteUsers[indexPath.row]
         cell.setFavoriteCell(favorite: favorite)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let favorite = favoriteUsers[indexPath.row]
+        let favorite = viewModel.favoriteUsers[indexPath.row]
         let destVC = FollowersListViewController(username: favorite.login)
         navigationController?.pushViewController(destVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
-        favoriteUsers.remove(at: indexPath.row)
+        viewModel.favoriteUsers.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .left)
-        UserDefaultsManager().setArrayToLocal(key: .favorites, array: favoriteUsers)
+        UserDefaultsManager().setArrayToLocal(key: .favorites, array: viewModel.favoriteUsers)
     }
 }
