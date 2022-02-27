@@ -54,4 +54,4 @@ identifier_name:
     - no
 cyclomatic_complexity:
   ignores_case_statements: true
-reporter: "github-actions-logging" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji, sonarqube, markdown, github-actions-logging)
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji, sonarqube, markdown, github-actions-logging)
