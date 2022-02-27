@@ -9,8 +9,8 @@ This project stands for an app which you can see the list followers of a GitHub 
   <img src="https://user-images.githubusercontent.com/37029827/155900553-2325a298-3306-4b9a-a25c-ea287b7117f1.gif" alt="animated" />
 </p>
 
-<!-- TABLE OF CONTENTS -->
 
+<!-- TABLE OF CONTENTS -->
 ## Table of contents
 
 * [Tech Stack](#techstack)
@@ -27,7 +27,7 @@ This project stands for an app which you can see the list followers of a GitHub 
 - SPM
 - Programmatic UI without Storyboards
 - Fully Generic Network Layer with Protocol extensions
-- Continuous Integration flows for iOS Builds, Linting with GitHub Actions
+- Continuous Integration flows for iOS Builds, SwiftLint with GitHub Actions
 - Generic User Defaults Management
 
 <!-- GETTING STARTED -->
