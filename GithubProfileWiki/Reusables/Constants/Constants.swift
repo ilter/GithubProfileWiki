@@ -67,4 +67,8 @@ struct Constants {
         static let followers = "heart"
         static let following = "person.2"
     }
+    
+    enum PageTitles: String {
+        case favorites = "Favorites"
+    }
 }

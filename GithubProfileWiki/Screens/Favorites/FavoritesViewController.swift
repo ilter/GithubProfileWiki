@@ -8,13 +8,13 @@
 import UIKit
 
 final class FavoritesViewController: UIViewController {
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
-    }()
     
-    private let viewModel = FavoritesViewModel()
+    private lazy var viewModel = FavoritesViewModel()
+    private lazy var viewSource = FavoritesView()
+    
+    override func loadView() {
+        view = viewSource
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,29 +23,15 @@ final class FavoritesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         viewModel.loadFavorites()
-        tableView.reloadData()
+        viewSource.reloadTableViewData()
     }
     
     private func setupUI() {
         view.backgroundColor = .systemBackground
-        title = "Favorites"
+        title = Constants.PageTitles.favorites.rawValue
         navigationController?.navigationBar.prefersLargeTitles = true
-        
-        view.addSubview(tableView)
-        configureTableView()
-    }
-    
-}
-
-// MARK: - Configure UI Elements
-extension FavoritesViewController {
-    private func configureTableView() {
-        tableView.frame = view.bounds
-        tableView.rowHeight = Constants.Styling.maxSpacing * 4
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.reuseIdentifier)
+        viewSource.tableView.delegate = self
+        viewSource.tableView.dataSource = self
     }
 }
 

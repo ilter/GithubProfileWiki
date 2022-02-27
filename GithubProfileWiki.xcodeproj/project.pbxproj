@@ -36,6 +36,7 @@
 		364E078E279927BB0085E799 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E078D279927BB0085E799 /* UIImage+Extension.swift */; };
 		365802E027CAE7DF00925158 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365802DF27CAE7DF00925158 /* SearchView.swift */; };
 		365802EA27CB098100925158 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365802E927CB098100925158 /* FavoritesViewModel.swift */; };
+		365802EE27CBC8A700925158 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365802ED27CBC8A700925158 /* FavoritesView.swift */; };
 		365931BE279C409F00834D25 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365931BD279C409F00834D25 /* Constants.swift */; };
 		365931C9279C442700834D25 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365931C8279C442700834D25 /* UIView+Constraints.swift */; };
 		368CD91E279D8B45003FABA6 /* APIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368CD91D279D8B45003FABA6 /* APIHandler.swift */; };
@@ -88,6 +89,7 @@
 		364E078D279927BB0085E799 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		365802DF27CAE7DF00925158 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		365802E927CB098100925158 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		365802ED27CBC8A700925158 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		365931BD279C409F00834D25 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		365931C8279C442700834D25 /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		368CD91D279D8B45003FABA6 /* APIHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHandler.swift; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 				364E0788279527950085E799 /* FavoritesViewController.swift */,
 				364D4AC027B5C7C900E773B6 /* FavoriteCell.swift */,
 				365802E927CB098100925158 /* FavoritesViewModel.swift */,
+				365802ED27CBC8A700925158 /* FavoritesView.swift */,
 			);
 			path = Favorites;
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 				363F40BB27AEE9C5006C79AB /* EmptyStateView.swift in Sources */,
 				3609175B279F609A0031FF14 /* FollowerCell.swift in Sources */,
 				365802E027CAE7DF00925158 /* SearchView.swift in Sources */,
+				365802EE27CBC8A700925158 /* FavoritesView.swift in Sources */,
 				368CD91E279D8B45003FABA6 /* APIHandler.swift in Sources */,
 				364D4ABD27B5B73400E773B6 /* UserDefaults+Helper.swift in Sources */,
 				364E0775279522530085E799 /* SceneDelegate.swift in Sources */,
