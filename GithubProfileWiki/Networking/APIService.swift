@@ -10,13 +10,12 @@ import Foundation
 final class APIService<T: APIHandler> {
     let apiRequest: T
     let urlSession: URLSession
-    
     init(apiRequest: T, urlSession: URLSession = .shared) {
         self.apiRequest = apiRequest
         self.urlSession = urlSession
     }
-    
-    func submitRequest(requestData: T.RequestDataType, completionHandler: @escaping (T.ResponseDataType?, Error?) -> ()) {
+
+    func submitRequest(requestData: T.RequestDataType, completionHandler: @escaping (T.ResponseDataType?, Error?) -> Void) {
         if let urlRequest = apiRequest.submitRequest(from: requestData) {
             urlSession.dataTask(with: urlRequest) { ( data, response, error) in
                 guard let data = data,
