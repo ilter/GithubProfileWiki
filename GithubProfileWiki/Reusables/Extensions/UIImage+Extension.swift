@@ -10,7 +10,7 @@ import UIKit
 extension UIImage {
 
     class var githubLogo: UIImage {
-        return UIImage(named: "github-logo")!
+        return UIImage(named: "github-search")!
     }
 
     class var emptyStateLogo: UIImage {
