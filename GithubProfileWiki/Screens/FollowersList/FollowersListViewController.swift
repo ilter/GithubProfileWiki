@@ -20,7 +20,7 @@ final class FollowersListViewController: UIViewController {
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
     
     var username: String!
-    private var viewModel = FollowersListViewModel()
+    private lazy var viewModel = FollowersListViewModel()
     private var isSearching: Bool = false
     
     init(username: String) {
