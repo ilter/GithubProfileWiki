@@ -46,10 +46,7 @@ extension UIViewController {
     
     func dismissLoadingView() {
         // Put it to the main thread because of the closure call on getFollower
-        DispatchQueue.main.async {
-            containerView.removeFromSuperview()
-            containerView = nil
-        }
+            containerView.isHidden = true
     }
     
     func showEmptyStateView(with message: String, in view: UIView) {

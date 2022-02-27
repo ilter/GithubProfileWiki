@@ -51,6 +51,14 @@ extension UIView {
     func configureHeight(height: CGFloat) {
         heightAnchor.constraint(equalToConstant: height).isActive = true
     }
+    
+    func alignFitEdges(insetedBy: CGFloat = .zero) {
+        translatesAutoresizingMaskIntoConstraints = false
+        leadingAnchor.constraint(equalTo: superview!.leadingAnchor, constant: insetedBy).isActive = true
+        trailingAnchor.constraint(equalTo: superview!.trailingAnchor, constant: -insetedBy).isActive = true
+        topAnchor.constraint(equalTo: superview!.topAnchor, constant: insetedBy).isActive = true
+        bottomAnchor.constraint(equalTo: superview!.bottomAnchor, constant: -insetedBy).isActive = true
+    }
 }
     
 
