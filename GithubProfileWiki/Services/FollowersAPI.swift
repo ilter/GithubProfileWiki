@@ -8,7 +8,7 @@
 import Foundation
 
 struct FollowersAPI: APIHandler {
-    
+
     public enum FollowersRequestConstantValues: String {
         static var pageNum: Int = 1
         static var hasMoreFollower: Bool = true
@@ -16,9 +16,9 @@ struct FollowersAPI: APIHandler {
         case page
         case perPage = "per_page"
     }
-    
+
     var userName: String
-    
+
     func submitRequest(from param: [String: Any]) -> URLRequest? {
         let urlString = URLPath(userName: userName).followersUrl
         if var url = URL(string: urlString) {
@@ -30,7 +30,7 @@ struct FollowersAPI: APIHandler {
         }
             return nil
     }
-    
+
     func parseResponse(data: Data, response: HTTPURLResponse) throws -> Followers {
         return try defaultParseResponse(data: data, response: response)
     }

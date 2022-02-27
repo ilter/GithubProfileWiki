@@ -23,17 +23,17 @@ protocol FollowersListViewModelOutput: AnyObject {
     func dismissLoading()
     func updateData(on followers: [Follower]?)
     func showFollowersEmpty()
-    
+
 }
 
 final class FollowersListViewModel {
     var followers: [Follower] = []
     weak var output: FollowersListViewModelOutput?
     var filteredFollowers: [Follower] = []
-    
-    private func fetchFollowers(userName: String, param: [String: Any], completion: @escaping (Followers?, Error?) -> ()) {
+
+    private func fetchFollowers(userName: String, param: [String: Any], completion: @escaping (Followers?, Error?) -> Void) {
         let request = FollowersAPI(userName: userName)
-        
+
         let apiService = APIService(apiRequest: request)
         apiService.submitRequest(requestData: param) { (model, error) in
             if error != nil {
@@ -43,10 +43,10 @@ final class FollowersListViewModel {
             }
         }
     }
-    
-    private func fetchUserInfo(userName: String, param: [String: Any], completion: @escaping (User?, Error?) -> ()) {
+
+    private func fetchUserInfo(userName: String, param: [String: Any], completion: @escaping (User?, Error?) -> Void) {
         let request = UserAPI(userName: userName)
-        
+
         let apiService = APIService(apiRequest: request)
         apiService.submitRequest(requestData: param) { (model, error) in
             if error != nil {
@@ -56,7 +56,7 @@ final class FollowersListViewModel {
             }
         }
     }
-    
+
     private func addFavoriteUserToUserDefaults(with user: Follower) {
         let userDefaultsManager = UserDefaultsManager()
         var favorites: [Follower] = userDefaultsManager.getArrayFromLocal(key: .favorites)
@@ -66,14 +66,16 @@ final class FollowersListViewModel {
 }
 
 extension FollowersListViewModel: FollowersListViewModelInput {
-    
+
     func updateData(on followers: [Follower]?) {
         output?.updateData(on: followers)
     }
-        
+
     func loadFollowers(userName: String, page: Int) {
-        let queryParams: [String: Any] = [FollowersAPI.FollowersRequestConstantValues.page.rawValue: page,
-                                          FollowersAPI.FollowersRequestConstantValues.perPage.rawValue: FollowersAPI.FollowersRequestConstantValues.followersPerPage]
+        let queryParams: [String: Any] = [
+            FollowersAPI.FollowersRequestConstantValues.page.rawValue: page,
+            FollowersAPI.FollowersRequestConstantValues.perPage.rawValue: FollowersAPI.FollowersRequestConstantValues.followersPerPage
+        ]
         self.output?.displayLoading()
         fetchFollowers(userName: userName, param: queryParams) { [weak self] (model, error) in
             self?.output?.dismissLoading()
@@ -93,7 +95,7 @@ extension FollowersListViewModel: FollowersListViewModelInput {
             }
         }
     }
-    
+
     func addCurrentUserToFavorites(userName: String) {
         fetchUserInfo(userName: userName, param: [:]) {[weak self] (response, error) in
             self?.output?.dismissLoading()
@@ -114,22 +116,20 @@ extension FollowersListViewModel: FollowersListViewModelInput {
             }
         }
     }
-    
+
     func userHasMoreFollower() -> Bool {
         return FollowersAPI.FollowersRequestConstantValues.hasMoreFollower
     }
-    
+
     func resetPageNumber() {
         FollowersAPI.FollowersRequestConstantValues.pageNum = 1
     }
-    
+
     func increasePageNumber() {
         FollowersAPI.FollowersRequestConstantValues.pageNum += 1
     }
-    
+
     func getPageNumber() -> Int {
         return FollowersAPI.FollowersRequestConstantValues.pageNum
     }
 }
-
-
