@@ -8,9 +8,8 @@
 import Foundation
 
 extension Swift.Optional where Wrapped == String {
-    
-}
 
+}
 
 protocol AnyOptional {
     var isNil: Bool { get }

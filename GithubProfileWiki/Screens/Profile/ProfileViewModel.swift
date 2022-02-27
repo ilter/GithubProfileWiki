@@ -22,10 +22,10 @@ protocol ProfileViewModelOutput: AnyObject {
 
 class ProfileViewModel {
     weak var output: ProfileViewModelOutput?
-    
-    private func fetchUserInfo(userName: String, param: [String: Any], completion: @escaping (User?, Error?) -> ()) {
+
+    private func fetchUserInfo(userName: String, param: [String: Any], completion: @escaping (User?, Error?) -> Void) {
         let request = UserAPI(userName: userName)
-        
+
         let apiService = APIService(apiRequest: request)
         apiService.submitRequest(requestData: param) { (model, error) in
             if error != nil {
@@ -35,19 +35,18 @@ class ProfileViewModel {
             }
         }
     }
-    
-    
+
 }
 
 extension ProfileViewModel: ProfileViewModelInput {
     func showUserFollowers(for user: User) {
         output?.showUserFollowers(for: user)
     }
-    
+
     func showGitHubProfile(for user: User) {
         output?.showGitHubProfile(for: user)
     }
-    
+
     func loadUserInfo(userName: String) {
         fetchUserInfo(userName: userName, param: [:]) { [weak self] (response, error) in
             guard let self = self else { return }

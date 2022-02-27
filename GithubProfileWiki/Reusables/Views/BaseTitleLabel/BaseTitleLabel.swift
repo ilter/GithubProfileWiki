@@ -13,18 +13,18 @@ class BaseTitleLabel: UILabel {
         super.init(frame: frame)
         configureLabel()
     }
-    
+
     required init?(coder: NSCoder) {
         return nil
     }
-    
+
     init(textAlignment: NSTextAlignment, fontSize: CGFloat, fontWeight: UIFont.Weight) {
         super.init(frame: .zero)
         self.textAlignment = textAlignment
         self.font = UIFont.systemFont(ofSize: fontSize, weight: fontWeight)
         configureLabel()
     }
-    
+
     private func configureLabel() {
         textColor = .label
         adjustsFontSizeToFitWidth = true

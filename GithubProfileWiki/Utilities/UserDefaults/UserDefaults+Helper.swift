@@ -13,7 +13,7 @@ import Foundation
     private var defaultsStorage: UserDefaults {
         UserDefaults.standard
     }
-    
+
     var wrappedValue: Value {
         get {
             let value = defaultsStorage.value(forKey: key) as? Value
@@ -27,7 +27,7 @@ import Foundation
             }
         }
     }
-    
+
     init(wrappedValue initialValue: Value, key: String) {
         self.initialValue = initialValue
         self.key = key
