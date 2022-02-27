@@ -25,5 +25,4 @@ protocol ResponseHandlerProtocol {
     func parseResponse(data: Data, response: HTTPURLResponse) throws -> ResponseDataType
 }
 
-
 typealias APIHandler = RequestHandlerProtocol & ResponseHandlerProtocol

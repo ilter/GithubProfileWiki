@@ -15,42 +15,42 @@ final class FollowersListViewController: UIViewController {
     public enum Section {
         case main
     }
-    
+
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
-    
+
     var username: String!
     private lazy var viewModel = FollowersListViewModel()
     private var isSearching: Bool = false
-    
+
     init(username: String) {
         self.username = username
         super.init(nibName: nil, bundle: nil)
-        
+
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
         configureSearchController()
         configureCollectionView()
         configureDataSource()
-        
+
         let addButton = UIBarButtonItem(barButtonSystemItem: .add,
                                         target: self,
                                         action: #selector(addButtonTapped))
-        
+
         navigationItem.rightBarButtonItem = addButton
-        
+
         viewModel.output = self
-        
+
         viewModel.loadFollowers(userName: username, page: viewModel.getPageNumber())
         viewModel.resetPageNumber()
     }
-    
+
     @objc func addButtonTapped() {
         viewModel.addCurrentUserToFavorites(userName: username)
     }
@@ -58,7 +58,7 @@ final class FollowersListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
+
 }
 
 // MARK: - Configure CollectionView
@@ -71,20 +71,20 @@ extension FollowersListViewController {
         collectionView.backgroundColor = .systemBackground
         collectionView.register(FollowerCell.self,
                                 forCellWithReuseIdentifier: FollowerCell.reuseIdentifier)
-        
+
         collectionView.configureConstraint(top: (view.topAnchor, .zero),
                                            bottom: (view.bottomAnchor, .zero),
                                            leading: (view.safeAreaLayoutGuide.leadingAnchor, .zero),
                                            trailing: (view.safeAreaLayoutGuide.trailingAnchor, .zero))
     }
-    
+
     private func configureViewController() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.setNavigationBarHidden(false, animated: true)
         title = username
     }
-    
+
     private func configureSearchController() {
         let searchController = UISearchController()
         searchController.searchResultsUpdater = self
@@ -92,7 +92,7 @@ extension FollowersListViewController {
         searchController.searchBar.placeholder = "Search for a username"
         navigationItem.searchController = searchController
     }
-    
+
     private func createThreeColumnFlowLayout() -> UICollectionViewFlowLayout {
         let width = view.bounds.width
         let minimumItemSpacesing: CGFloat = 10
@@ -104,16 +104,22 @@ extension FollowersListViewController {
                                                bottom: Constants.Styling.defaultSpacing,
                                                right: Constants.Styling.defaultSpacing)
         flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth + 48)
-        
+
         return flowLayout
     }
-    
+
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, Follower>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, follower ) -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowerCell.reuseIdentifier, for: indexPath) as? FollowerCell
-            cell?.set(follower: follower)
-            return cell
-        })
+        dataSource = UICollectionViewDiffableDataSource<Section, Follower>(
+            collectionView: collectionView,
+            cellProvider: { (collectionView, indexPath, follower ) -> UICollectionViewCell? in
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: FollowerCell.reuseIdentifier,
+                    for: indexPath
+                ) as? FollowerCell
+                cell?.set(follower: follower)
+                return cell
+            }
+        )
     }
 }
 
@@ -124,7 +130,7 @@ extension FollowersListViewController: UICollectionViewDelegate {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         let height = scrollView.frame.size.height
-        
+
         if offsetY > contentHeight - height {
             guard viewModel.userHasMoreFollower() else { return }
             viewModel.increasePageNumber()
@@ -132,7 +138,7 @@ extension FollowersListViewController: UICollectionViewDelegate {
             viewModel.loadFollowers(userName: username, page: pageNumber)
         }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let activeArray: [Follower] = isSearching ? viewModel.filteredFollowers : viewModel.followers
         let follower: Follower = activeArray[indexPath.row]
@@ -155,7 +161,7 @@ extension FollowersListViewController: UISearchResultsUpdating, UISearchBarDeleg
         viewModel.filteredFollowers = viewModel.followers.filter {$0.login.lowercased().contains(keyword.lowercased())}
         viewModel.updateData(on: viewModel.filteredFollowers)
     }
-    
+
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isSearching = false
         viewModel.updateData(on: viewModel.followers)
@@ -181,15 +187,15 @@ extension FollowersListViewController: FollowersListViewModelOutput {
     func displayAlertPopup(title: String, message: String, buttonTitle: String) {
         presentAlertPopupOnMainThread(title: title, message: message, buttonTitle: buttonTitle)
     }
-    
+
     func displayLoading() {
         showLoadingViewWithActivityIndicator()
     }
-    
+
     func dismissLoading() {
         dismissLoadingView()
     }
-    
+
     func updateData(on followers: [Follower]?) {
         guard let followers = followers else {
             return
@@ -201,9 +207,9 @@ extension FollowersListViewController: FollowersListViewModelOutput {
             self.dataSource.apply(snapshot, animatingDifferences: true)
         }
     }
-    
+
     func showFollowersEmpty() {
         showEmptyStateView(with: "This User does not have any followers.😞", in: self.view)
     }
-    
+
 }

@@ -13,17 +13,17 @@ class BaseBodyLabel: UILabel {
         super.init(frame: frame)
         configureLabel()
     }
-    
+
     required init?(coder: NSCoder) {
         return nil
     }
-    
+
     init(textAlignment: NSTextAlignment) {
         super.init(frame: .zero)
         self.textAlignment = textAlignment
         configureLabel()
     }
-    
+
     private func configureLabel() {
         textColor = .secondaryLabel
         font = Constants.Font.bodyFont
