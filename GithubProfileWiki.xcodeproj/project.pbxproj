@@ -391,7 +391,6 @@
 		368CD92C279D9319003FABA6 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				368CD92D279D9347003FABA6 /* FollowersAPI.swift */,
 				363F40BF27AF1C2F006C79AB /* UserAPI.swift */,
 			);
 			path = Services;
@@ -438,6 +437,7 @@
 		36E0303627CD94380002DBF0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				368CD92D279D9347003FABA6 /* FollowersAPI.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
