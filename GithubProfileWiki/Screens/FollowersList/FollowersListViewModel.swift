@@ -31,19 +31,6 @@ final class FollowersListViewModel {
     weak var output: FollowersListViewModelOutput?
     var filteredFollowers: [Follower] = []
 
-    private func fetchFollowers(userName: String, param: [String: Any], completion: @escaping (Followers?, Error?) -> Void) {
-        let request = FollowersAPI(userName: userName)
-
-        let apiService = APIService(apiRequest: request)
-        apiService.submitRequest(requestData: param) { (model, error) in
-            if error != nil {
-                completion(nil, error)
-            } else {
-                completion(model, nil)
-            }
-        }
-    }
-
     private func fetchUserInfo(userName: String, param: [String: Any], completion: @escaping (User?, Error?) -> Void) {
         let request = UserAPI(userName: userName)
 
@@ -72,26 +59,17 @@ extension FollowersListViewModel: FollowersListViewModelInput {
     }
 
     func loadFollowers(userName: String, page: Int) {
-        let queryParams: [String: Any] = [
-            FollowersAPI.FollowersRequestConstantValues.page.rawValue: page,
-            FollowersAPI.FollowersRequestConstantValues.perPage.rawValue: FollowersAPI.FollowersRequestConstantValues.followersPerPage
-        ]
         self.output?.displayLoading()
-        fetchFollowers(userName: userName, param: queryParams) { [weak self] (model, error) in
-            self?.output?.dismissLoading()
-            if error != nil {
-                self?.output?.displayAlertPopup(title: "Error", message: error?.localizedDescription ?? "Hata", buttonTitle: "Close")
-            } else {
-                if let viewModel = model {
-                    if viewModel.count == .zero && self?.followers.count == .zero {
-                        FollowersAPI.FollowersRequestConstantValues.hasMoreFollower = false
-                        FollowersAPI.FollowersRequestConstantValues.pageNum = .zero
-                        self?.output?.showFollowersEmpty()
-                        return
-                    }
-                    self?.followers.append(contentsOf: viewModel)
-                    self?.output?.updateData(on: self?.followers)
-                }
+        Task(priority: .background) {
+            let service = FollowersAPI()
+            let result = try await service.getFollowers(username: userName)
+            self.output?.dismissLoading()
+            switch result {
+            case .success(let followersResponse):
+                self.followers.append(contentsOf: followersResponse)
+                self.output?.updateData(on: self.followers)
+            case .failure(let error):
+                self.output?.displayAlertPopup(title: "Error", message: error.customMessage, buttonTitle: "Tamam")
             }
         }
     }
