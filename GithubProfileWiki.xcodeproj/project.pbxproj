@@ -46,7 +46,7 @@
 		368CD926279D8E47003FABA6 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368CD925279D8E47003FABA6 /* APIService.swift */; };
 		368CD928279D904C003FABA6 /* APIEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368CD927279D904C003FABA6 /* APIEnvironment.swift */; };
 		368CD92A279D9206003FABA6 /* APIPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368CD929279D9206003FABA6 /* APIPath.swift */; };
-		368CD92E279D9347003FABA6 /* FollowersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368CD92D279D9347003FABA6 /* FollowersAPI.swift */; };
+		368CD92E279D9347003FABA6 /* FollowersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368CD92D279D9347003FABA6 /* FollowersService.swift */; };
 		368CD931279D95F5003FABA6 /* Followers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368CD930279D95F5003FABA6 /* Followers.swift */; };
 		368CD933279D9937003FABA6 /* FollowersListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368CD932279D9937003FABA6 /* FollowersListViewModel.swift */; };
 		36AA948327BEC24400254E77 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AA948227BEC24400254E77 /* ProfileView.swift */; };
@@ -104,7 +104,7 @@
 		368CD925279D8E47003FABA6 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		368CD927279D904C003FABA6 /* APIEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEnvironment.swift; sourceTree = "<group>"; };
 		368CD929279D9206003FABA6 /* APIPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIPath.swift; sourceTree = "<group>"; };
-		368CD92D279D9347003FABA6 /* FollowersAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersAPI.swift; sourceTree = "<group>"; };
+		368CD92D279D9347003FABA6 /* FollowersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersService.swift; sourceTree = "<group>"; };
 		368CD930279D95F5003FABA6 /* Followers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Followers.swift; sourceTree = "<group>"; };
 		368CD932279D9937003FABA6 /* FollowersListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersListViewModel.swift; sourceTree = "<group>"; };
 		36AA948227BEC24400254E77 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -437,7 +437,7 @@
 		36E0303627CD94380002DBF0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				368CD92D279D9347003FABA6 /* FollowersAPI.swift */,
+				368CD92D279D9347003FABA6 /* FollowersService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -549,7 +549,7 @@
 				368CD933279D9937003FABA6 /* FollowersListViewModel.swift in Sources */,
 				364D4AC127B5C7C900E773B6 /* FavoriteCell.swift in Sources */,
 				368CD92A279D9206003FABA6 /* APIPath.swift in Sources */,
-				368CD92E279D9347003FABA6 /* FollowersAPI.swift in Sources */,
+				368CD92E279D9347003FABA6 /* FollowersService.swift in Sources */,
 				36AD8877279C16D000B0B5D3 /* BaseTitleLabel.swift in Sources */,
 				36AA948327BEC24400254E77 /* ProfileView.swift in Sources */,
 				364E0773279522530085E799 /* AppDelegate.swift in Sources */,

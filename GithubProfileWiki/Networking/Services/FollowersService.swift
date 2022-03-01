@@ -11,7 +11,7 @@ protocol FollowersServiceable {
     func getFollowers(username: String, pageNumber: Int) async throws -> Result<Followers, RequestError>
 }
 
-struct FollowersAPI: NetworkManager, FollowersServiceable {
+struct FollowersService: NetworkManager, FollowersServiceable {
     func getFollowers(username: String, pageNumber: Int) async throws -> Result<Followers, RequestError> {
         return try await sendRequest(endpoint: FollowersEndpoint.followers(userName: username, pageNumber: pageNumber), responseModel: Followers.self)
     }

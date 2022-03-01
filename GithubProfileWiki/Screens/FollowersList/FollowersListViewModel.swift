@@ -37,7 +37,7 @@ final class FollowersListViewModel {
     var filteredFollowers: [Follower] = []
     let followersService: FollowersServiceable
 
-    init(service: FollowersServiceable = FollowersAPI()) {
+    init(service: FollowersServiceable = FollowersService()) {
         self.followersService = service
     }
 
