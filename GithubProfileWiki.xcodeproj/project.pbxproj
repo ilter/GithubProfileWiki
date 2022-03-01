@@ -9,10 +9,11 @@
 /* Begin PBXBuildFile section */
 		3609175B279F609A0031FF14 /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3609175A279F609A0031FF14 /* FollowerCell.swift */; };
 		3609175E279F62550031FF14 /* BaseImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3609175D279F62550031FF14 /* BaseImageView.swift */; };
+		362435AC27CE832A00DBDA35 /* UserEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362435AB27CE832A00DBDA35 /* UserEndpoint.swift */; };
 		363BF5A327ADD9F3005028C1 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 363BF5A227ADD9F3005028C1 /* Kingfisher */; };
 		363F40BB27AEE9C5006C79AB /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363F40BA27AEE9C5006C79AB /* EmptyStateView.swift */; };
 		363F40BE27AF174A006C79AB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363F40BD27AF174A006C79AB /* ProfileViewController.swift */; };
-		363F40C027AF1C2F006C79AB /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363F40BF27AF1C2F006C79AB /* UserAPI.swift */; };
+		363F40C027AF1C2F006C79AB /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363F40BF27AF1C2F006C79AB /* UserService.swift */; };
 		363F40C227AF1C80006C79AB /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363F40C127AF1C80006C79AB /* ProfileViewModel.swift */; };
 		363F40C427AF1CA3006C79AB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363F40C327AF1CA3006C79AB /* User.swift */; };
 		363F40C727AF28F9006C79AB /* ProfileHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363F40C627AF28F9006C79AB /* ProfileHeaderViewController.swift */; };
@@ -66,9 +67,10 @@
 /* Begin PBXFileReference section */
 		3609175A279F609A0031FF14 /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
 		3609175D279F62550031FF14 /* BaseImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseImageView.swift; sourceTree = "<group>"; };
+		362435AB27CE832A00DBDA35 /* UserEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEndpoint.swift; sourceTree = "<group>"; };
 		363F40BA27AEE9C5006C79AB /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		363F40BD27AF174A006C79AB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		363F40BF27AF1C2F006C79AB /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
+		363F40BF27AF1C2F006C79AB /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		363F40C127AF1C80006C79AB /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		363F40C327AF1CA3006C79AB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		363F40C627AF28F9006C79AB /* ProfileHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewController.swift; sourceTree = "<group>"; };
@@ -391,7 +393,6 @@
 		368CD92C279D9319003FABA6 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				363F40BF27AF1C2F006C79AB /* UserAPI.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -430,6 +431,7 @@
 			isa = PBXGroup;
 			children = (
 				36E0303927CD94880002DBF0 /* FollowersEndpoint.swift */,
+				362435AB27CE832A00DBDA35 /* UserEndpoint.swift */,
 			);
 			path = Endpoints;
 			sourceTree = "<group>";
@@ -437,6 +439,7 @@
 		36E0303627CD94380002DBF0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				363F40BF27AF1C2F006C79AB /* UserService.swift */,
 				368CD92D279D9347003FABA6 /* FollowersService.swift */,
 			);
 			path = Services;
@@ -542,7 +545,8 @@
 				36AD887D279C25E900B0B5D3 /* UIViewController+Extension.swift in Sources */,
 				364E078B27989BB60085E799 /* BaseUITextField.swift in Sources */,
 				364E078E279927BB0085E799 /* UIImage+Extension.swift in Sources */,
-				363F40C027AF1C2F006C79AB /* UserAPI.swift in Sources */,
+				363F40C027AF1C2F006C79AB /* UserService.swift in Sources */,
+				362435AC27CE832A00DBDA35 /* UserEndpoint.swift in Sources */,
 				363F40C427AF1CA3006C79AB /* User.swift in Sources */,
 				364D4ABB27B5A9F900E773B6 /* UserDefaultsManager.swift in Sources */,
 				365931C9279C442700834D25 /* UIView+Constraints.swift in Sources */,

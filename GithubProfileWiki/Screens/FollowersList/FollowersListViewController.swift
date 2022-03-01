@@ -46,7 +46,7 @@ final class FollowersListViewController: UIViewController {
         navigationItem.rightBarButtonItem = addButton
 
         viewModel.output = self
-
+        viewModel.loadFollowers(userName: username, page: viewModel.getPageNumber())
         viewModel.resetPageNumber()
     }
 
@@ -56,7 +56,6 @@ final class FollowersListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.loadFollowers(userName: username, page: viewModel.getPageNumber())
         viewModel.resetPageNumber()
     }
 

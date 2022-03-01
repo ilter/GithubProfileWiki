@@ -36,22 +36,12 @@ final class FollowersListViewModel {
     weak var output: FollowersListViewModelOutput?
     var filteredFollowers: [Follower] = []
     let followersService: FollowersServiceable
+    let userService: UserServiceable
 
-    init(service: FollowersServiceable = FollowersService()) {
+    init(service: FollowersServiceable = FollowersService(),
+         userService: UserServiceable = UserService()) {
         self.followersService = service
-    }
-
-    private func fetchUserInfo(userName: String, param: [String: Any], completion: @escaping (User?, Error?) -> Void) {
-        let request = UserAPI(userName: userName)
-
-        let apiService = APIService(apiRequest: request)
-        apiService.submitRequest(requestData: param) { (model, error) in
-            if error != nil {
-                completion(nil, error)
-            } else {
-                completion(model, nil)
-            }
-        }
+        self.userService = userService
     }
 
     private func addFavoriteUserToUserDefaults(with user: Follower) {
@@ -87,22 +77,19 @@ extension FollowersListViewModel: FollowersListViewModelInput {
     }
 
     func addCurrentUserToFavorites(userName: String) {
-        fetchUserInfo(userName: userName, param: [:]) {[weak self] (response, error) in
-            self?.output?.dismissLoading()
-            if error != nil {
-                self?.output?.displayAlertPopup(title: Constants.WarningTexts.errorTitle,
-                                                message: error?.localizedDescription ?? Constants.WarningTexts.errorMessage,
+        Task(priority: .background) {
+            let result = try await userService.getUser(userName: userName)
+            switch result {
+            case .success(let response):
+                let favoriteUser: Follower = Follower(login: response.login, avatarUrl: response.avatarUrl)
+                addFavoriteUserToUserDefaults(with: favoriteUser)
+                self.output?.displayAlertPopup(title: Constants.InfoTexts.success,
+                                              message: Constants.InfoTexts.favorited,
+                                              buttonTitle: Constants.InfoTexts.closeButtonText)
+            case .failure(let error):
+                self.output?.displayAlertPopup(title: Constants.WarningTexts.errorTitle,
+                                                message: error.customMessage,
                                                 buttonTitle: Constants.InfoTexts.closeButtonText)
-            } else {
-                if let userModel = response {
-                    DispatchQueue.main.async {
-                        let favoriteUser: Follower = Follower(login: userModel.login, avatarUrl: userModel.avatarUrl)
-                        self?.addFavoriteUserToUserDefaults(with: favoriteUser)
-                        self?.output?.displayAlertPopup(title: Constants.InfoTexts.success,
-                                                      message: Constants.InfoTexts.favorited,
-                                                      buttonTitle: Constants.InfoTexts.closeButtonText)
-                    }
-                }
             }
         }
     }
