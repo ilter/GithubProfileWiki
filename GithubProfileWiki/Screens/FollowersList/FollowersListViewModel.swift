@@ -61,9 +61,9 @@ extension FollowersListViewModel: FollowersListViewModelInput {
     func loadFollowers(userName: String, page: Int) {
         self.output?.displayLoading()
         Task(priority: .background) {
-            let service = FollowersAPI()
-            let result = try await service.getFollowers(username: userName)
             self.output?.dismissLoading()
+            let service = FollowersAPI()
+            let result = try await service.getFollowers(username: userName, pageNumber: page)
             switch result {
             case .success(let followersResponse):
                 self.followers.append(contentsOf: followersResponse)
@@ -96,18 +96,20 @@ extension FollowersListViewModel: FollowersListViewModelInput {
     }
 
     func userHasMoreFollower() -> Bool {
-        return FollowersAPI.FollowersRequestConstantValues.hasMoreFollower
+        //return FollowersAPI.FollowersRequestConstantValues.hasMoreFollower
+        return false
     }
 
     func resetPageNumber() {
-        FollowersAPI.FollowersRequestConstantValues.pageNum = 1
+        //FollowersAPI.FollowersRequestConstantValues.pageNum = 1
     }
 
     func increasePageNumber() {
-        FollowersAPI.FollowersRequestConstantValues.pageNum += 1
+      // FollowersAPI.FollowersRequestConstantValues.pageNum += 1
     }
 
     func getPageNumber() -> Int {
-        return FollowersAPI.FollowersRequestConstantValues.pageNum
+       // return FollowersAPI.FollowersRequestConstantValues.pageNum
+        return 1 
     }
 }

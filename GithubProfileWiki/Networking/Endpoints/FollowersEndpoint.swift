@@ -8,14 +8,21 @@
 import Foundation
 
 enum FollowersEndpoint {
-    case followers(userName: String)
+    case followers(userName: String, pageNumber: Int = 1)
 }
 
 extension FollowersEndpoint: Endpoint {
+    public enum FollowersRequestConstantValues: String {
+        static var hasMoreFollower: Bool = true
+        static var followersPerPage: String = "30"
+        case page
+        case perPage = "per_page"
+    }
+
     var path: String {
         switch self {
-        case .followers(let userName):
-            return "users/\(userName)/followers"
+        case .followers(let userName, let pagenumber):
+            return "users/\(userName)/followers?\(FollowersRequestConstantValues.page.rawValue)=\(pagenumber)"
         }
     }
 
