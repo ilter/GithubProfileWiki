@@ -47,7 +47,6 @@ final class FollowersListViewController: UIViewController {
 
         viewModel.output = self
 
-        viewModel.loadFollowers(userName: username, page: viewModel.getPageNumber())
         viewModel.resetPageNumber()
     }
 
@@ -57,6 +56,8 @@ final class FollowersListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewModel.loadFollowers(userName: username, page: viewModel.getPageNumber())
+        viewModel.resetPageNumber()
     }
 
 }
@@ -209,7 +210,9 @@ extension FollowersListViewController: FollowersListViewModelOutput {
     }
 
     func showFollowersEmpty() {
-        showEmptyStateView(with: "This User does not have any followers.😞", in: self.view)
+        DispatchQueue.main.async {
+            self.showEmptyStateView(with: "This User does not have any followers.😞", in: self.view)
+        }
     }
 
 }

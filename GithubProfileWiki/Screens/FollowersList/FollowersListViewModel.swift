@@ -26,10 +26,20 @@ protocol FollowersListViewModelOutput: AnyObject {
 
 }
 
+private enum FollowersListConstants {
+    static var hasMoreFollower: Bool = true
+    static var pageNumber: Int = 1
+}
+
 final class FollowersListViewModel {
     var followers: [Follower] = []
     weak var output: FollowersListViewModelOutput?
     var filteredFollowers: [Follower] = []
+    let followersService: FollowersServiceable
+
+    init(service: FollowersServiceable = FollowersAPI()) {
+        self.followersService = service
+    }
 
     private func fetchUserInfo(userName: String, param: [String: Any], completion: @escaping (User?, Error?) -> Void) {
         let request = UserAPI(userName: userName)
@@ -62,10 +72,12 @@ extension FollowersListViewModel: FollowersListViewModelInput {
         self.output?.displayLoading()
         Task(priority: .background) {
             self.output?.dismissLoading()
-            let service = FollowersAPI()
-            let result = try await service.getFollowers(username: userName, pageNumber: page)
+            let result = try await followersService.getFollowers(username: userName, pageNumber: page)
             switch result {
             case .success(let followersResponse):
+                if followersResponse.isEmpty && self.followers.isEmpty {
+                        self.output?.showFollowersEmpty()
+                }
                 self.followers.append(contentsOf: followersResponse)
                 self.output?.updateData(on: self.followers)
             case .failure(let error):
@@ -96,20 +108,18 @@ extension FollowersListViewModel: FollowersListViewModelInput {
     }
 
     func userHasMoreFollower() -> Bool {
-        //return FollowersAPI.FollowersRequestConstantValues.hasMoreFollower
-        return false
+        return FollowersListConstants.hasMoreFollower
     }
 
     func resetPageNumber() {
-        //FollowersAPI.FollowersRequestConstantValues.pageNum = 1
+        FollowersListConstants.pageNumber = 1
     }
 
     func increasePageNumber() {
-      // FollowersAPI.FollowersRequestConstantValues.pageNum += 1
+        FollowersListConstants.pageNumber += 1
     }
 
     func getPageNumber() -> Int {
-       // return FollowersAPI.FollowersRequestConstantValues.pageNum
-        return 1 
+       return FollowersListConstants.pageNumber
     }
 }
