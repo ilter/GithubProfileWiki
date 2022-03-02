@@ -11,7 +11,7 @@ import XCTest
 class DateConverterTests: XCTestCase {
     func test__itConvertsDateToDisplayCorrectly() {
         let mockDate = "2016-10-22T21:17:16Z"
-        XCTAssertEqual("Oct 23, 2016", mockDate.convertDateToDisplayFormat())
+        XCTAssertEqual("Oct 22, 2016", mockDate.convertDateToDisplayFormat())
     }
 }
 
