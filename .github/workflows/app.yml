@@ -14,6 +14,9 @@ jobs:
   test:
     name: Build
     runs-on: macos-11
+    defaults:
+      run:
+        working-directory: ./GithubProfileWiki
     strategy:
       matrix:
         destination: ["platform=iOS Simulator,OS=15.2,name=iPhone 12"]
