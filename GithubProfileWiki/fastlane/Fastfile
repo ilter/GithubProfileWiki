@@ -20,10 +20,6 @@ before_all do
   clear_derived_data
 end
 
-SIMULATORS = [
-  'iPhone 12'
-]
-
 platform :ios do
   desc "Runs unit tests"
   lane :unittest do

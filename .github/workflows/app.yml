@@ -1,23 +1,34 @@
-name: App Build
+name: App CI
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main, develop ]
-    
+    branches: [main, develop]
+    paths:
+      - ".github/workflows/swiftlint.yml"
+      - ".swiftlint.yml"
+      - "**/*.swift"
+
 jobs:
   test:
     name: Build Test
     runs-on: macos-latest
     strategy:
-        matrix:
-          destination: ['platform=iOS Simulator,OS=15.2,name=iPhone 12']
+      matrix:
+        destination: ["platform=iOS Simulator,OS=15.2,name=iPhone 12"]
     steps:
       - name: Checkout
         uses: actions/checkout@master
+      - name: Run Unit Tests
+        run: |
+          bundle exec fastlane unittest
+        env:
+          destination: ${{ matrix.destination }}
       - name: Build
         run: |
           xcodebuild clean build -project GithubProfileWiki.xcodeproj -scheme GithubProfileWiki -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
-        env: 
-         destination: ${{ matrix.destination }}
+        env:
+          destination: ${{ matrix.destination }}
+      - name: Run SwiftLint
+        run: swiftlint lint --reporter github-actions-logging
