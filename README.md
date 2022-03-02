@@ -22,7 +22,7 @@ This project stands for an app which you can see the list followers of a GitHub 
 
 ## Tech Stack
 
-- Swift 5 (iOS 13 Deployment Target)
+- Swift 5
 - MVVM Architectural Pattern
 - SPM
 - Programmatic UI without Storyboards
