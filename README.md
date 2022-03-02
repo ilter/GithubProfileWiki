@@ -22,7 +22,7 @@ This project stands for an app which you can see the list followers of a GitHub 
 
 ## Tech Stack
 
-- Swift 5 (iOS 13 Deployment Target)
+- Swift 5
 - MVVM Architectural Pattern
 - SPM
 - Programmatic UI without Storyboards
@@ -53,9 +53,9 @@ It can be build with both XCode 12.5 and XCode 13
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Improve coverage of Unit Tests
+- [X] _Improve coverage of Unit Tests._
+- [X] _Improve Network Layer with Async-Await_
 - [ ] Integrate Fastlane for CI with GitHub Actions
-- [ ] Improve Network Layer with Async-Await and Combine
 - [ ] Create components library with SPM.
 
 See the [open issues](https://github.com/ilter/GithubProfileWiki/issues) for a full list of proposed features (and known issues).

@@ -22,20 +22,11 @@ protocol ProfileViewModelOutput: AnyObject {
 
 class ProfileViewModel {
     weak var output: ProfileViewModelOutput?
+    let userService: UserServiceable
 
-    private func fetchUserInfo(userName: String, param: [String: Any], completion: @escaping (User?, Error?) -> Void) {
-        let request = UserAPI(userName: userName)
-
-        let apiService = APIService(apiRequest: request)
-        apiService.submitRequest(requestData: param) { (model, error) in
-            if error != nil {
-                completion(nil, error)
-            } else {
-                completion(model, nil)
-            }
-        }
+    init(userService: UserServiceable = UserService()) {
+        self.userService = userService
     }
-
 }
 
 extension ProfileViewModel: ProfileViewModelInput {
@@ -48,16 +39,17 @@ extension ProfileViewModel: ProfileViewModelInput {
     }
 
     func loadUserInfo(userName: String) {
-        fetchUserInfo(userName: userName, param: [:]) { [weak self] (response, error) in
-            guard let self = self else { return }
-            if error != nil {
-                self.output?.displayError(title: Constants.WarningTexts.errorTitle,
-                                     message:  error?.localizedDescription ?? Constants.WarningTexts.errorMessage,
-                                     buttonTitle: Constants.InfoTexts.closeButtonText)
-            } else {
-                if let userModel = response {
-                        self.output?.configureUIElements(with: userModel)
+        Task {
+            let result = try await userService.getUser(userName: userName)
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    self.output?.configureUIElements(with: response)
                 }
+            case .failure(let error):
+                self.output?.displayError(title: Constants.WarningTexts.errorTitle,
+                                          message:  error.customMessage,
+                                     buttonTitle: Constants.InfoTexts.closeButtonText)
             }
         }
     }
