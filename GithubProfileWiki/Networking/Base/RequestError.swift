@@ -16,9 +16,15 @@ enum RequestError: Error {
     var customMessage: String {
         switch self {
         case .decode:
-            return "Decode error"
+            return "[NetworkError] Decode error"
         case .unauthorized:
-            return "Session expired"
+            return "[NetworkError] Session expired"
+        case .invalidURL:
+            return "[NetworkError] Invalid URL"
+        case .noResponse:
+            return "[NetworkError] No Response"
+        case .unexpectedStatusCode:
+            return "[NetworkError] Unexpected Status Code"
         default:
             return "Unknown error"
         }
