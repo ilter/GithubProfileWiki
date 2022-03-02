@@ -55,7 +55,7 @@ It can be build with both XCode 12.5 and XCode 13
 
 - [X] _Improve coverage of Unit Tests._
 - [X] _Improve Network Layer with Async-Await_
-- [ ] Integrate Fastlane for CI with GitHub Actions
+- [X] _Integrate Fastlane for CI with GitHub Actions_
 - [ ] Create components library with SPM.
 
 See the [open issues](https://github.com/ilter/GithubProfileWiki/issues) for a full list of proposed features (and known issues).
