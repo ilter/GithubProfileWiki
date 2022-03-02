@@ -1,23 +1,46 @@
-name: App Build
+name: Development Workflow
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main, develop ]
-    
+    branches: [main, develop]
+    paths:
+      - ".github/workflows/swiftlint.yml"
+      - ".swiftlint.yml"
+      - "**/*.swift"
+
 jobs:
   test:
-    name: Build Test
-    runs-on: macos-latest
+    name: Build
+    runs-on: macos-11
+    defaults:
+      run:
+        working-directory: ./GithubProfileWiki
     strategy:
-        matrix:
-          destination: ['platform=iOS Simulator,OS=15.2,name=iPhone 12']
+      matrix:
+        destination: ["platform=iOS Simulator,OS=15.2,name=iPhone 12"]
+    env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/GithubProfileWiki/Gemfile
     steps:
       - name: Checkout
         uses: actions/checkout@master
+
+      - name: Install dependencies
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+          bundler-cache: true
+
+      - name: Run Unit Tests
+        run: |
+          bundle exec fastlane unittest
+        env:
+          destination: ${{ matrix.destination }}
       - name: Build
         run: |
           xcodebuild clean build -project GithubProfileWiki.xcodeproj -scheme GithubProfileWiki -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
-        env: 
-         destination: ${{ matrix.destination }}
+        env:
+          destination: ${{ matrix.destination }}
+      - name: Run SwiftLint
+        run: swiftlint lint --reporter github-actions-logging

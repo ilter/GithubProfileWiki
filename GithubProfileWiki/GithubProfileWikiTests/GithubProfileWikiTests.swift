@@ -95,8 +95,8 @@ class GithubProfileWikiTests: XCTestCase {
             let failingResult = try await serviceMock.getFollowersError(userName: "ilter", pageNumber: 1)
 
             switch failingResult {
-            case .success(let followers):
-                XCTAssertEqual(followers.first?.login, "keremkusmezer")
+            case .success(_):
+                XCTFail("This case should be fail")
             case .failure(let fail):
                 XCTAssertEqual(fail, RequestError.decode)
             }
@@ -104,16 +104,15 @@ class GithubProfileWikiTests: XCTestCase {
             XCTFail("The Followers Service request should not fail")
         }
     }
-    
+
     func test__UserServiceFailure() async {
         let serviceMock = UserServiceMock()
         do {
             let failingResult = try await serviceMock.getUserFailure(userName: "ilter")
 
             switch failingResult {
-            case .success(let followers):
-                XCTAssertEqual(user.login, "ilter")
-                XCTAssertEqual(user.publicRepos, 10)
+            case .success(_):
+                XCTFail("This case should be fail")
             case .failure(let fail):
                 XCTAssertEqual(fail, RequestError.noResponse)
             }
