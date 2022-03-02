@@ -26,35 +26,22 @@ protocol FollowersListViewModelOutput: AnyObject {
 
 }
 
+private enum FollowersListConstants {
+    static var hasMoreFollower: Bool = true
+    static var pageNumber: Int = 1
+}
+
 final class FollowersListViewModel {
     var followers: [Follower] = []
     weak var output: FollowersListViewModelOutput?
     var filteredFollowers: [Follower] = []
+    let followersService: FollowersServiceable
+    let userService: UserServiceable
 
-    private func fetchFollowers(userName: String, param: [String: Any], completion: @escaping (Followers?, Error?) -> Void) {
-        let request = FollowersAPI(userName: userName)
-
-        let apiService = APIService(apiRequest: request)
-        apiService.submitRequest(requestData: param) { (model, error) in
-            if error != nil {
-                completion(nil, error)
-            } else {
-                completion(model, nil)
-            }
-        }
-    }
-
-    private func fetchUserInfo(userName: String, param: [String: Any], completion: @escaping (User?, Error?) -> Void) {
-        let request = UserAPI(userName: userName)
-
-        let apiService = APIService(apiRequest: request)
-        apiService.submitRequest(requestData: param) { (model, error) in
-            if error != nil {
-                completion(nil, error)
-            } else {
-                completion(model, nil)
-            }
-        }
+    init(service: FollowersServiceable = FollowersService(),
+         userService: UserServiceable = UserService()) {
+        self.followersService = service
+        self.userService = userService
     }
 
     private func addFavoriteUserToUserDefaults(with user: Follower) {
@@ -72,64 +59,54 @@ extension FollowersListViewModel: FollowersListViewModelInput {
     }
 
     func loadFollowers(userName: String, page: Int) {
-        let queryParams: [String: Any] = [
-            FollowersAPI.FollowersRequestConstantValues.page.rawValue: page,
-            FollowersAPI.FollowersRequestConstantValues.perPage.rawValue: FollowersAPI.FollowersRequestConstantValues.followersPerPage
-        ]
         self.output?.displayLoading()
-        fetchFollowers(userName: userName, param: queryParams) { [weak self] (model, error) in
-            self?.output?.dismissLoading()
-            if error != nil {
-                self?.output?.displayAlertPopup(title: "Error", message: error?.localizedDescription ?? "Hata", buttonTitle: "Close")
-            } else {
-                if let viewModel = model {
-                    if viewModel.count == .zero && self?.followers.count == .zero {
-                        FollowersAPI.FollowersRequestConstantValues.hasMoreFollower = false
-                        FollowersAPI.FollowersRequestConstantValues.pageNum = .zero
-                        self?.output?.showFollowersEmpty()
-                        return
-                    }
-                    self?.followers.append(contentsOf: viewModel)
-                    self?.output?.updateData(on: self?.followers)
+        Task(priority: .background) {
+            self.output?.dismissLoading()
+            let result = try await followersService.getFollowers(username: userName, pageNumber: page)
+            switch result {
+            case .success(let followersResponse):
+                if followersResponse.isEmpty && self.followers.isEmpty {
+                        self.output?.showFollowersEmpty()
                 }
+                self.followers.append(contentsOf: followersResponse)
+                self.output?.updateData(on: self.followers)
+            case .failure(let error):
+                self.output?.displayAlertPopup(title: "Error", message: error.customMessage, buttonTitle: "Tamam")
             }
         }
     }
 
     func addCurrentUserToFavorites(userName: String) {
-        fetchUserInfo(userName: userName, param: [:]) {[weak self] (response, error) in
-            self?.output?.dismissLoading()
-            if error != nil {
-                self?.output?.displayAlertPopup(title: Constants.WarningTexts.errorTitle,
-                                                message: error?.localizedDescription ?? Constants.WarningTexts.errorMessage,
+        Task(priority: .background) {
+            let result = try await userService.getUser(userName: userName)
+            switch result {
+            case .success(let response):
+                let favoriteUser: Follower = Follower(login: response.login, avatarUrl: response.avatarUrl)
+                addFavoriteUserToUserDefaults(with: favoriteUser)
+                self.output?.displayAlertPopup(title: Constants.InfoTexts.success,
+                                              message: Constants.InfoTexts.favorited,
+                                              buttonTitle: Constants.InfoTexts.closeButtonText)
+            case .failure(let error):
+                self.output?.displayAlertPopup(title: Constants.WarningTexts.errorTitle,
+                                                message: error.customMessage,
                                                 buttonTitle: Constants.InfoTexts.closeButtonText)
-            } else {
-                if let userModel = response {
-                    DispatchQueue.main.async {
-                        let favoriteUser: Follower = Follower(login: userModel.login, avatarUrl: userModel.avatarUrl)
-                        self?.addFavoriteUserToUserDefaults(with: favoriteUser)
-                        self?.output?.displayAlertPopup(title: Constants.InfoTexts.success,
-                                                      message: Constants.InfoTexts.favorited,
-                                                      buttonTitle: Constants.InfoTexts.closeButtonText)
-                    }
-                }
             }
         }
     }
 
     func userHasMoreFollower() -> Bool {
-        return FollowersAPI.FollowersRequestConstantValues.hasMoreFollower
+        return FollowersListConstants.hasMoreFollower
     }
 
     func resetPageNumber() {
-        FollowersAPI.FollowersRequestConstantValues.pageNum = 1
+        FollowersListConstants.pageNumber = 1
     }
 
     func increasePageNumber() {
-        FollowersAPI.FollowersRequestConstantValues.pageNum += 1
+        FollowersListConstants.pageNumber += 1
     }
 
     func getPageNumber() -> Int {
-        return FollowersAPI.FollowersRequestConstantValues.pageNum
+       return FollowersListConstants.pageNumber
     }
 }
