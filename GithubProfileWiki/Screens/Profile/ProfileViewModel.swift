@@ -24,7 +24,7 @@ class ProfileViewModel {
     weak var output: ProfileViewModelOutput?
     let userService: UserServiceable
 
-    init(userService: UserService = UserService()) {
+    init(userService: UserServiceable = UserService()) {
         self.userService = userService
     }
 }
@@ -39,7 +39,7 @@ extension ProfileViewModel: ProfileViewModelInput {
     }
 
     func loadUserInfo(userName: String) {
-        Task(priority: .background) {
+        Task {
             let result = try await userService.getUser(userName: userName)
             switch result {
             case .success(let response):

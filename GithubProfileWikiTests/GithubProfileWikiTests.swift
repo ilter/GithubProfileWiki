@@ -89,6 +89,39 @@ class GithubProfileWikiTests: XCTestCase {
         }
     }
 
+    func test__FollowersServiceFailure() async {
+        let serviceMock = FollowersServiceMock()
+        do {
+            let failingResult = try await serviceMock.getFollowersError(userName: "ilter", pageNumber: 1)
+
+            switch failingResult {
+            case .success(let followers):
+                XCTAssertEqual(followers.first?.login, "keremkusmezer")
+            case .failure(let fail):
+                XCTAssertEqual(fail, RequestError.decode)
+            }
+        } catch {
+            XCTFail("The Followers Service request should not fail")
+        }
+    }
+    
+    func test__UserServiceFailure() async {
+        let serviceMock = UserServiceMock()
+        do {
+            let failingResult = try await serviceMock.getUserFailure(userName: "ilter")
+
+            switch failingResult {
+            case .success(let followers):
+                XCTAssertEqual(user.login, "ilter")
+                XCTAssertEqual(user.publicRepos, 10)
+            case .failure(let fail):
+                XCTAssertEqual(fail, RequestError.noResponse)
+            }
+        } catch {
+            XCTFail("The User Service request should not fail")
+        }
+    }
+
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         measure {
@@ -121,10 +154,18 @@ final class FollowersServiceMock: Mockable, FollowersServiceable {
     func getFollowers(username: String, pageNumber: Int) async throws -> Result<Followers, RequestError> {
         return .success(loadJSON(filename: "followers_response", type: Followers.self))
     }
+
+    func getFollowersError(userName: String, pageNumber: Int) async throws -> Result<Followers, RequestError> {
+        return .failure(.decode)
+    }
 }
 
 final class UserServiceMock: Mockable, UserServiceable {
     func getUser(userName: String) async throws -> Result<User, RequestError> {
         return .success(loadJSON(filename: "user_response", type: User.self))
+    }
+
+    func getUserFailure(userName: String) async throws -> Result<User, RequestError> {
+        return .failure(.noResponse)
     }
 }
