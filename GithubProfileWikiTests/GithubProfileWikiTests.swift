@@ -55,6 +55,40 @@ class GithubProfileWikiTests: XCTestCase {
         XCTAssertEqual(mockUser, self.user)
     }
 
+    func test__FollowersServiceMock() async {
+        let serviceMock = FollowersServiceMock()
+        do {
+            let failingResult = try await serviceMock.getFollowers(username: "ilter", pageNumber: 1)
+
+            switch failingResult {
+            case .success(let followers):
+                XCTAssertEqual(followers.first?.login, "keremkusmezer")
+            case .failure:
+                XCTFail("The Followers Service request with ilter param should not fail")
+            }
+        } catch {
+            XCTFail("The Followers Service request should not fail")
+        }
+    }
+
+    func test__UserServiceMock() async {
+        let userServiceMock = UserServiceMock()
+
+        do {
+            let failingResult = try await userServiceMock.getUser(userName: "ilter")
+
+            switch failingResult {
+            case .success(let user):
+                XCTAssertEqual(user.login, "ilter")
+                XCTAssertEqual(user.publicRepos, 10)
+            case .failure:
+                XCTFail("The User Service request with ilter param should not fail")
+            }
+        } catch {
+            XCTFail("The User Service request should not fail")
+        }
+    }
+
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         measure {
@@ -80,5 +114,17 @@ extension GithubProfileWikiTests: ProfileViewModelOutput {
     }
     func showGitHubProfile(for user: User) {
         self.user = user
+    }
+}
+
+final class FollowersServiceMock: Mockable, FollowersServiceable {
+    func getFollowers(username: String, pageNumber: Int) async throws -> Result<Followers, RequestError> {
+        return .success(loadJSON(filename: "followers_response", type: Followers.self))
+    }
+}
+
+final class UserServiceMock: Mockable, UserServiceable {
+    func getUser(userName: String) async throws -> Result<User, RequestError> {
+        return .success(loadJSON(filename: "user_response", type: User.self))
     }
 }
