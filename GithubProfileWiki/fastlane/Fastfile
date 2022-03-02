@@ -1,0 +1,33 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+before_all do
+  xcversion(version: "~> 13.0")
+  clear_derived_data
+end
+
+platform :ios do
+  desc "Runs unit tests"
+  lane :unittest do
+    scan(
+      scheme: "GithubProfileWikiTests",
+      clean: true,
+      reset_simulator: true,
+      device: "iPhone 12"
+    )
+  end
+end
